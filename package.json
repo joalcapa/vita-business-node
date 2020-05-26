@@ -1,0 +1,27 @@
+{
+  "name": "vita-business-node",
+  "version": "1.0.0",
+  "description": "SDK Vita Business",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joalcapa/vita-business-node.git"
+  },
+  "keywords": [
+    "Vita",
+    "Business"
+  ],
+  "author": "Jose Caceres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joalcapa/vita-business-node/issues"
+  },
+  "homepage": "https://github.com/joalcapa/vita-business-node#readme",
+  "dependencies": {
+    "typescript": "^3.9.3"
+  }
+}
