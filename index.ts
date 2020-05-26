@@ -6,4 +6,4 @@ Business.config({
     secret: 'secret',
 });
 
-Business.wallet().get();
+Business.wallets().get();

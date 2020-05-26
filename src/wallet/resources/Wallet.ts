@@ -1,10 +1,11 @@
 class Wallet {
     private uuid: string = '';
 
-    public constructor(resp: any) {
-        const {uuid} = resp;
+    public constructor(uuid: string = '') {
         this.uuid = uuid;
     }
+
+    public get() { }
 
     public transactions() { }
 

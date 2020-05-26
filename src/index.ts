@@ -1,5 +1,5 @@
 import Configuration from './config';
-import wallet from './wallet';
+import wallets from './wallet';
 
 export const config = (credentials: any) => {
     const {X_Login = null, X_Trans_Key = null, secret = null} = credentials;
@@ -12,5 +12,5 @@ export const config = (credentials: any) => {
 
 export default {
     config,
-    wallet,
+    wallets,
 };
