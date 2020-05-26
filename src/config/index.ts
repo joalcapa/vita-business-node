@@ -12,6 +12,10 @@ class Configuration {
         return Configuration.instance;
     }
 
+    public getCredentials() {
+        return this.credentials;
+    }
+
     public setCredentials(credentials: object) {
         this.credentials = credentials;
     }
