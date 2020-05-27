@@ -1,5 +1,3 @@
-import {walletProvider} from "../../providers";
-
 class BaseResource {
     public promise (callback: any = () => {}) {
         return new Promise((resolve, reject) => {
