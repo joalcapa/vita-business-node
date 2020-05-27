@@ -17,8 +17,6 @@ class Wallet {
     public get() { }
 
     public create(token: string = '') {
-
-
         return new Promise(async (resolve, reject) => {
             if (!token)
                 token = crypto.randomBytes(64).toString('hex');
