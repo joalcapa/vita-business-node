@@ -1,13 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var wallet = function (uuid) {
+var resources_1 = require("./resources");
+var wallets = function (uuid) {
     if (uuid === void 0) { uuid = ''; }
-    var _uuid = uuid;
-    var get = function () {
-        console.log('GET WALLET');
-    };
-    return {
-        get: get,
-    };
+    return new resources_1.Wallet(uuid);
 };
-exports.default = wallet;
+exports.default = wallets;

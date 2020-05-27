@@ -14,5 +14,5 @@ exports.config = function (credentials) {
 };
 exports.default = {
     config: exports.config,
-    wallet: wallet_1.default,
+    wallets: wallet_1.default,
 };

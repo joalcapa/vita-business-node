@@ -1,3 +1,5 @@
+'use strict';
+
 import crypto from 'crypto';
 import {walletProvider} from '../../providers';
 
@@ -20,7 +22,7 @@ class Wallet {
             token = crypto.randomBytes(64).toString('hex');
 
         try {
-            const response = await walletProvider.createWallet(token);
+            const response: any = await walletProvider.createWallet(token);
             const {wallet: {uuid, attributes: {created_at, is_master, balances}}} = response;
 
             this.uuid = uuid;

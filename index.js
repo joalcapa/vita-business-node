@@ -9,4 +9,4 @@ src_1.default.config({
     X_Trans_Key: 'X_Trans_Key',
     secret: 'secret',
 });
-src_1.default.wallet().get();
+src_1.default.wallets().get();

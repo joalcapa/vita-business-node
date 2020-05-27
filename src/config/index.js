@@ -10,6 +10,9 @@ var Configuration = /** @class */ (function () {
         }
         return Configuration.instance;
     };
+    Configuration.prototype.getCredentials = function () {
+        return this.credentials;
+    };
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;
     };

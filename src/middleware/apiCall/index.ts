@@ -7,7 +7,7 @@ const prepareHeaders = (credentials: any, hash: any = {}) => {
     const X_Date = new Date().toISOString();
     const result = hash.sort().join();
 
-    let signature = crypto.createHmac('sha256', secret);
+    let signature: any = crypto.createHmac('sha256', secret);
     signature.update(`${X_Login}${X_Date}${result}`);
     signature = signature.digest('hex');
 
