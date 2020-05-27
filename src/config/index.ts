@@ -25,8 +25,24 @@ class Configuration {
         this.credentials = credentials;
     }
 
+    public getUrl() {
+        return Configuration.instance.credentials.env === Configuration.QA ? Configuration.QA_URL : Configuration.PROD_URL;
+    }
+
     public static getWalletsUrl() {
-        return `${Configuration.instance.credentials.env === Configuration.QA ? Configuration.QA_URL : Configuration.PROD_URL}/wallets`;
+        return `${Configuration.instance.getUrl()}/wallets`;
+    }
+
+    public static getTransactionsUrl() {
+        return `${Configuration.instance.getUrl()}/transactions`;
+    }
+
+    public static getPricesUrl() {
+        return `${Configuration.instance.getUrl()}/prices`;
+    }
+
+    public static getBanksUrl() {
+        return `${Configuration.instance.getUrl()}/banks`;
     }
 }
 
