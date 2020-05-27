@@ -89,8 +89,12 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
             case 0:
                 _a = preConfig.data, data = _a === void 0 ? {} : _a;
                 credentials = config_1.default.getInstance().getCredentials();
-                if (!credentials)
-                    throw ("Invalid credentials");
+                if (!credentials) {
+                    return [2 /*return*/, {
+                            error: 1,
+                            message: 'Invalid credentials',
+                        }];
+                }
                 config = __assign(__assign({}, preConfig), { headers: prepareHeaders(credentials, data) });
                 _b.label = 1;
             case 1:

@@ -36,8 +36,12 @@ const apiCall = async (preConfig: any) => {
     const {data = {}} = preConfig;
     const credentials = Configuration.getInstance().getCredentials();
 
-    if (!credentials)
-        throw("Invalid credentials")
+    if (!credentials) {
+        return {
+            error: 1,
+            message: 'Invalid credentials',
+        }
+    }
 
     const config = {
         ...preConfig,
