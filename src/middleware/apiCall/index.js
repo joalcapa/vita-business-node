@@ -57,7 +57,7 @@ var prepareResult = function (hash, type) {
     if (hash === void 0) { hash = {}; }
     if (type === void 0) { type = ''; }
     switch (type) {
-        case 'WALLET': {
+        case 'WALLET_CREATE': {
             var token = hash.token;
             return "token" + token;
         }
@@ -70,7 +70,7 @@ var prepareHeaders = function (credentials, hash) {
     if (hash === void 0) { hash = {}; }
     var X_Login = credentials.X_Login, X_Trans_Key = credentials.X_Trans_Key, secret = credentials.secret;
     var X_Date = new Date().toISOString();
-    var result = prepareResult(hash, 'WALLET');
+    var result = prepareResult(hash, 'WALLET_CREATE');
     var signature = crypto_1.default.createHmac('sha256', secret);
     signature.update("" + X_Login + X_Date + result);
     signature = signature.digest('hex');

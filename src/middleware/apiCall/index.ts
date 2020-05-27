@@ -4,7 +4,7 @@ import Configuration from '../../config';
 
 const prepareResult = (hash: any = {}, type: string = '') => {
     switch(type) {
-        case 'WALLET': {
+        case 'WALLET_CREATE': {
             const {token} = hash;
             return `token${token}`;
         }
@@ -17,7 +17,7 @@ const prepareResult = (hash: any = {}, type: string = '') => {
 const prepareHeaders = (credentials: any, hash: any = {}) => {
     const {X_Login, X_Trans_Key, secret} = credentials;
     const X_Date = new Date().toISOString();
-    const result = prepareResult(hash, 'WALLET');
+    const result = prepareResult(hash, 'WALLET_CREATE');
 
     let signature: any = crypto.createHmac('sha256', secret);
     signature.update(`${X_Login}${X_Date}${result}`);

@@ -46,7 +46,6 @@ src_1.default.config({
     secret: 'secret',
     env: 'qa',
 });
-// Business.wallets().create().then(r => console.log(r)).catch(e => console.log(e));
 var f = function () { return __awaiter(void 0, void 0, void 0, function () {
     var e_1;
     return __generator(this, function (_a) {

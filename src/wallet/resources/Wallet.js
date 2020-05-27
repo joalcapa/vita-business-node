@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -41,22 +54,70 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var crypto_1 = __importDefault(require("crypto"));
 var providers_1 = require("../../providers");
-var Wallet = /** @class */ (function () {
+var BaseResource_1 = __importDefault(require("./BaseResource"));
+var Wallet = /** @class */ (function (_super) {
+    __extends(Wallet, _super);
     function Wallet(uuid) {
         if (uuid === void 0) { uuid = ''; }
-        this.uuid = '';
-        this.created_at = '';
-        this.is_master = false;
-        this.balances = {
+        var _this = _super.call(this) || this;
+        _this.uuid = '';
+        _this.created_at = '';
+        _this.is_master = false;
+        _this.balances = {
             clp: 0,
         };
-        this.uuid = uuid;
+        _this.uuid = uuid;
+        return _this;
     }
-    Wallet.prototype.get = function () { };
+    Wallet.prototype.get = function (uuid) {
+        var _this = this;
+        if (uuid === void 0) { uuid = ''; }
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response, _a, uuid_1, _b, created_at, is_master, balances;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, providers_1.walletProvider.getWallet(uuid)];
+                    case 1:
+                        response = _c.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            _a = response.wallet, uuid_1 = _a.uuid, _b = _a.attributes, created_at = _b.created_at, is_master = _b.is_master, balances = _b.balances;
+                            this.uuid = uuid_1;
+                            this.created_at = created_at;
+                            this.is_master = is_master;
+                            this.balances = balances;
+                            resolve(this);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Wallet.prototype.all = function () {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.walletProvider.getWallets()];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Wallet.prototype.create = function (token) {
         var _this = this;
         if (token === void 0) { token = ''; }
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var response, _a, uuid, _b, created_at, is_master, balances;
             return __generator(this, function (_c) {
                 switch (_c.label) {
@@ -67,7 +128,7 @@ var Wallet = /** @class */ (function () {
                     case 1:
                         response = _c.sent();
                         if (response.error) {
-                            reject(new Error(JSON.stringify(response.error)));
+                            reject(response.error);
                         }
                         else {
                             _a = response.wallet, uuid = _a.uuid, _b = _a.attributes, created_at = _b.created_at, is_master = _b.is_master, balances = _b.balances;
@@ -75,7 +136,7 @@ var Wallet = /** @class */ (function () {
                             this.created_at = created_at;
                             this.is_master = is_master;
                             this.balances = balances;
-                            resolve(response);
+                            resolve(this);
                         }
                         return [2 /*return*/];
                 }
@@ -88,5 +149,5 @@ var Wallet = /** @class */ (function () {
     Wallet.prototype.withdrawal = function () { };
     Wallet.prototype.send = function () { };
     return Wallet;
-}());
+}(BaseResource_1.default));
 exports.default = Wallet;

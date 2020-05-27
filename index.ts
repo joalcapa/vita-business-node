@@ -7,13 +7,12 @@ Business.config({
     env: 'qa',
 });
 
+const f = async () => {
+    try {
+        await Business.wallets().create()
+    } catch (e) {
+        console.log(e);
+    }
+};
 
-   // Business.wallets().create().then(r => console.log(r)).catch(e => console.log(e));
-
-    const f = async () => {
-        try {
-            await Business.wallets().create()
-        } catch (e) {console.log(e);
-        }
-    };
 f();
