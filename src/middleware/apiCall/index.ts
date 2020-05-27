@@ -2,10 +2,22 @@ import crypto from 'crypto';
 import axios from 'axios';
 import Configuration from '../../config';
 
+const prepareResult = (hash: any = {}, type: string = '') => {
+    switch(type) {
+        case 'WALLET': {
+            const {token} = hash;
+            return `token${token}`;
+        }
+        default: {
+            return '';
+        }
+    }
+};
+
 const prepareHeaders = (credentials: any, hash: any = {}) => {
     const {X_Login, X_Trans_Key, secret} = credentials;
     const X_Date = new Date().toISOString();
-    const result = hash.sort().join();
+    const result = prepareResult(hash, 'WALLET');
 
     let signature: any = crypto.createHmac('sha256', secret);
     signature.update(`${X_Login}${X_Date}${result}`);
@@ -34,8 +46,9 @@ const apiCall = async (preConfig: any) => {
 
     try {
         const response = await axios(config);
-    } catch (exception) {
-
+        return response.data;
+    } catch (e) {
+        return e.response.data;
     }
 };
 

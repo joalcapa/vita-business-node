@@ -1,6 +1,5 @@
-'use strict';
-
 import crypto from 'crypto';
+import {EventEmitter} from "events";
 import {walletProvider} from '../../providers';
 
 class Wallet {
@@ -17,22 +16,28 @@ class Wallet {
 
     public get() { }
 
-    public async create(token: string = '') {
-        if (!token)
-            token = crypto.randomBytes(64).toString('hex');
+    public create(token: string = '') {
 
-        try {
+
+        return new Promise(async (resolve, reject) => {
+            if (!token)
+                token = crypto.randomBytes(64).toString('hex');
+
             const response: any = await walletProvider.createWallet(token);
-            const {wallet: {uuid, attributes: {created_at, is_master, balances}}} = response;
 
-            this.uuid = uuid;
-            this.created_at = created_at;
-            this.is_master = is_master;
-            this.balances = balances;
+            if (response.error) {
+                reject(new Error(JSON.stringify(response.error)));
+            } else {
+                const {wallet: {uuid, attributes: {created_at, is_master, balances}}} = response;
 
-        } catch (e) {
+                this.uuid = uuid;
+                this.created_at = created_at;
+                this.is_master = is_master;
+                this.balances = balances;
 
-        }
+                resolve(response);
+            }
+        });
     }
 
     public transactions() { }

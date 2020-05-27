@@ -53,11 +53,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var crypto_1 = __importDefault(require("crypto"));
 var axios_1 = __importDefault(require("axios"));
 var config_1 = __importDefault(require("../../config"));
+var prepareResult = function (hash, type) {
+    if (hash === void 0) { hash = {}; }
+    if (type === void 0) { type = ''; }
+    switch (type) {
+        case 'WALLET': {
+            var token = hash.token;
+            return "token" + token;
+        }
+        default: {
+            return '';
+        }
+    }
+};
 var prepareHeaders = function (credentials, hash) {
     if (hash === void 0) { hash = {}; }
     var X_Login = credentials.X_Login, X_Trans_Key = credentials.X_Trans_Key, secret = credentials.secret;
     var X_Date = new Date().toISOString();
-    var result = hash.sort().join();
+    var result = prepareResult(hash, 'WALLET');
     var signature = crypto_1.default.createHmac('sha256', secret);
     signature.update("" + X_Login + X_Date + result);
     signature = signature.digest('hex');
@@ -70,7 +83,7 @@ var prepareHeaders = function (credentials, hash) {
     };
 };
 var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, data, credentials, config, response, exception_1;
+    var _a, data, credentials, config, response, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -85,10 +98,10 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
                 return [4 /*yield*/, axios_1.default(config)];
             case 2:
                 response = _b.sent();
-                return [3 /*break*/, 4];
+                return [2 /*return*/, response.data];
             case 3:
-                exception_1 = _b.sent();
-                return [3 /*break*/, 4];
+                e_1 = _b.sent();
+                return [2 /*return*/, e_1.response.data];
             case 4: return [2 /*return*/];
         }
     });

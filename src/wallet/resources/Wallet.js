@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -54,33 +54,33 @@ var Wallet = /** @class */ (function () {
     }
     Wallet.prototype.get = function () { };
     Wallet.prototype.create = function (token) {
+        var _this = this;
         if (token === void 0) { token = ''; }
-        return __awaiter(this, void 0, void 0, function () {
-            var response, _a, uuid, _b, created_at, is_master, balances, e_1;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response, _a, uuid, _b, created_at, is_master, balances;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         if (!token)
                             token = crypto_1.default.randomBytes(64).toString('hex');
-                        _c.label = 1;
-                    case 1:
-                        _c.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, providers_1.walletProvider.createWallet(token)];
-                    case 2:
+                    case 1:
                         response = _c.sent();
-                        _a = response.wallet, uuid = _a.uuid, _b = _a.attributes, created_at = _b.created_at, is_master = _b.is_master, balances = _b.balances;
-                        this.uuid = uuid;
-                        this.created_at = created_at;
-                        this.is_master = is_master;
-                        this.balances = balances;
-                        return [3 /*break*/, 4];
-                    case 3:
-                        e_1 = _c.sent();
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        if (response.error) {
+                            reject(new Error(JSON.stringify(response.error)));
+                        }
+                        else {
+                            _a = response.wallet, uuid = _a.uuid, _b = _a.attributes, created_at = _b.created_at, is_master = _b.is_master, balances = _b.balances;
+                            this.uuid = uuid;
+                            this.created_at = created_at;
+                            this.is_master = is_master;
+                            this.balances = balances;
+                            resolve(response);
+                        }
+                        return [2 /*return*/];
                 }
             });
-        });
+        }); });
     };
     Wallet.prototype.transactions = function () { };
     Wallet.prototype.recharge = function () { };
