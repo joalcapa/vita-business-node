@@ -80,7 +80,7 @@ class Wallet extends BaseResource {
     }
 
     public recharge(payload: any) {
-        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+        return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'recharge',
@@ -94,7 +94,7 @@ class Wallet extends BaseResource {
     }
 
     public purchase(payload: any) {
-        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+        return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'purchase',
@@ -112,7 +112,7 @@ class Wallet extends BaseResource {
     }
 
     public withdrawal(payload: any) {
-        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+        return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'withdrawal',
@@ -130,7 +130,7 @@ class Wallet extends BaseResource {
     }
 
     public send(payload: any) {
-        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+        return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'send',
