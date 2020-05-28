@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import Base from './base';
 import {walletProvider, transactionsProvider} from '../../../providers';
+import {RequestRecharge, RequestPurchase, RequestWithdrawal, RequestSend} from '../../../interfaces';
 
 class Wallet extends Base {
     private created_at: string = '';
@@ -79,12 +80,12 @@ class Wallet extends Base {
         });
     }
 
-    public recharge(payload: object) {
+    public recharge(request: RequestRecharge) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'recharge',
-                ...payload,
+                ...request,
             });
 
             response.error ?
@@ -93,12 +94,12 @@ class Wallet extends Base {
         });
     }
 
-    public purchase(payload: object) {
+    public purchase(request: RequestPurchase) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'purchase',
-                ...payload,
+                ...request,
             });
 
             if (response.error) {
@@ -111,12 +112,12 @@ class Wallet extends Base {
         });
     }
 
-    public withdrawal(payload: object) {
+    public withdrawal(request: RequestWithdrawal) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'withdrawal',
-                ...payload,
+                ...request,
             });
 
             if (response.error) {
@@ -129,12 +130,12 @@ class Wallet extends Base {
         });
     }
 
-    public send(payload: object) {
+    public send(request: RequestSend) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'send',
-                ...payload,
+                ...request,
             });
 
             if (response.error) {
