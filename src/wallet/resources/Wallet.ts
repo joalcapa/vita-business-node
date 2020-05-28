@@ -79,7 +79,7 @@ class Wallet extends BaseResource {
         });
     }
 
-    public recharge(payload: any) {
+    public recharge(payload: object) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
@@ -93,7 +93,7 @@ class Wallet extends BaseResource {
         });
     }
 
-    public purchase(payload: any) {
+    public purchase(payload: object) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
@@ -111,7 +111,7 @@ class Wallet extends BaseResource {
         });
     }
 
-    public withdrawal(payload: any) {
+    public withdrawal(payload: object) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
@@ -129,7 +129,7 @@ class Wallet extends BaseResource {
         });
     }
 
-    public send(payload: any) {
+    public send(payload: object) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
