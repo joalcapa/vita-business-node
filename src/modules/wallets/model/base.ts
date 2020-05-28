@@ -1,4 +1,4 @@
-class BaseResource {
+class Base {
     protected uuid: string = '';
 
     public promise (callback: any = () => {}) {
@@ -23,4 +23,4 @@ class BaseResource {
     }
 }
 
-export default BaseResource;
+export default Base;

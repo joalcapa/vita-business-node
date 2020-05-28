@@ -1,8 +1,8 @@
 import crypto from 'crypto';
-import {walletProvider, transactionsProvider} from '../../providers';
-import BaseResource from './BaseResource';
+import Base from './base';
+import {walletProvider, transactionsProvider} from '../../../providers';
 
-class Wallet extends BaseResource {
+class Wallet extends Base {
     private created_at: string = '';
     private is_master: boolean = false;
     private balances: object = {

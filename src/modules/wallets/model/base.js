@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var BaseResource = /** @class */ (function () {
-    function BaseResource() {
+var Base = /** @class */ (function () {
+    function Base() {
         this.uuid = '';
     }
-    BaseResource.prototype.promise = function (callback) {
+    Base.prototype.promise = function (callback) {
         if (callback === void 0) { callback = function () { }; }
         return new Promise(function (resolve, reject) {
             callback(resolve, function (error) {
@@ -12,7 +12,7 @@ var BaseResource = /** @class */ (function () {
             });
         });
     };
-    BaseResource.prototype.createTransaction = function (callback) {
+    Base.prototype.createTransaction = function (callback) {
         var _this = this;
         if (callback === void 0) { callback = function () { }; }
         return this.promise(function (resolve, reject) {
@@ -27,6 +27,6 @@ var BaseResource = /** @class */ (function () {
             }
         });
     };
-    return BaseResource;
+    return Base;
 }());
-exports.default = BaseResource;
+exports.default = Base;

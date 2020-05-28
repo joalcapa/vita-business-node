@@ -64,8 +64,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var crypto_1 = __importDefault(require("crypto"));
-var providers_1 = require("../../providers");
-var BaseResource_1 = __importDefault(require("./BaseResource"));
+var base_1 = __importDefault(require("./base"));
+var providers_1 = require("../../../providers");
 var Wallet = /** @class */ (function (_super) {
     __extends(Wallet, _super);
     function Wallet(uuid, created_at, is_master, balances) {
@@ -266,5 +266,5 @@ var Wallet = /** @class */ (function (_super) {
         }); });
     };
     return Wallet;
-}(BaseResource_1.default));
+}(base_1.default));
 exports.default = Wallet;
