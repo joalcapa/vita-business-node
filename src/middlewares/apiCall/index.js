@@ -64,7 +64,7 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
                             message: 'Invalid credentials',
                         }];
                 }
-                config = __assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint)), { headers: config_1.default.prepareHeaders(data, endpoint) });
+                config = __assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint)), config_1.default.prepareHeaders(data, endpoint));
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 3, , 4]);

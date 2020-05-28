@@ -119,11 +119,13 @@ var Configuration = /** @class */ (function () {
         signature.update("" + X_Login + X_Date + result);
         signature = signature.digest('hex');
         return {
-            "X-Date": X_Date,
-            "X-Login": X_Login,
-            "X-Trans-Key": X_Trans_Key,
-            "Content-Type": "application/json",
-            "Authorization": "V2-HMAC-SHA256, Signature: " + signature,
+            headers: {
+                "X-Date": X_Date,
+                "X-Login": X_Login,
+                "X-Trans-Key": X_Trans_Key,
+                "Content-Type": "application/json",
+                "Authorization": "V2-HMAC-SHA256, Signature: " + signature,
+            },
         };
     };
     Configuration.QA_URL = 'https://vita-wallet-api-qa-2.appspot.com/api/businesses';

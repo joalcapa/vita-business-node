@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import endpoints from './endpoints';
-import {Credentials} from '../interfaces';
+import {Credentials, RequestCreateWallet} from '../interfaces';
 
 class Configuration {
     private static instance: Configuration;
@@ -96,10 +96,10 @@ class Configuration {
         return `${Configuration.getUrl()}/banks`;
     }
 
-    public static prepareResult(hash: any, type: string) {
+    public static prepareResult(hash: object, type: string) {
         switch(type) {
             case endpoints.CREATE_WALLET: {
-                const {token} = hash;
+                const {token} = <RequestCreateWallet> hash;
                 return `token${token}`;
             }
             case endpoints.GET_WALLETS: {
@@ -132,7 +132,7 @@ class Configuration {
         }
     }
 
-    public static prepareHeaders(hash: any, type: string) {
+    public static prepareHeaders(hash: object, type: string) {
         const {X_Login, X_Trans_Key, secret} = Configuration.instance.credentials;
         const X_Date = new Date().toISOString();
         const result = Configuration.prepareResult(hash, type);
