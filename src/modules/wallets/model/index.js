@@ -182,13 +182,13 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
-    Wallet.prototype.recharge = function (payload) {
+    Wallet.prototype.recharge = function (request) {
         var _this = this;
         return this.createTransaction(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'recharge' }, payload))];
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'recharge' }, request))];
                     case 1:
                         response = _a.sent();
                         response.error ?
@@ -199,13 +199,13 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
-    Wallet.prototype.purchase = function (payload) {
+    Wallet.prototype.purchase = function (request) {
         var _this = this;
         return this.createTransaction(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var response, balances;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'purchase' }, payload))];
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'purchase' }, request))];
                     case 1:
                         response = _a.sent();
                         if (response.error) {
@@ -221,13 +221,13 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
-    Wallet.prototype.withdrawal = function (payload) {
+    Wallet.prototype.withdrawal = function (request) {
         var _this = this;
         return this.createTransaction(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var response, balances;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'withdrawal' }, payload))];
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'withdrawal' }, request))];
                     case 1:
                         response = _a.sent();
                         if (response.error) {
@@ -243,13 +243,13 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
-    Wallet.prototype.send = function (payload) {
+    Wallet.prototype.send = function (request) {
         var _this = this;
         return this.createTransaction(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var response, balances;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'send' }, payload))];
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'send' }, request))];
                     case 1:
                         response = _a.sent();
                         if (response.error) {
