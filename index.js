@@ -52,7 +52,7 @@ var f = function () { return __awaiter(void 0, void 0, void 0, function () {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, src_1.default.wallets().create()];
+                return [4 /*yield*/, src_1.default.wallets('start477').get()];
             case 1:
                 _a.sent();
                 return [3 /*break*/, 3];

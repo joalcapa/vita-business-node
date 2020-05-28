@@ -50,61 +50,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var crypto_1 = __importDefault(require("crypto"));
 var axios_1 = __importDefault(require("axios"));
 var config_1 = __importDefault(require("../../config"));
-var prepareResult = function (hash, type) {
-    if (hash === void 0) { hash = {}; }
-    if (type === void 0) { type = ''; }
-    switch (type) {
-        case 'WALLET_CREATE': {
-            var token = hash.token;
-            return "token" + token;
-        }
-        default: {
-            return '';
-        }
-    }
-};
-var prepareHeaders = function (credentials, hash) {
-    if (hash === void 0) { hash = {}; }
-    var X_Login = credentials.X_Login, X_Trans_Key = credentials.X_Trans_Key, secret = credentials.secret;
-    var X_Date = new Date().toISOString();
-    var result = prepareResult(hash, 'WALLET_CREATE');
-    var signature = crypto_1.default.createHmac('sha256', secret);
-    signature.update("" + X_Login + X_Date + result);
-    signature = signature.digest('hex');
-    return {
-        "X-Date": X_Date,
-        "X-Login": X_Login,
-        "X-Trans-Key": X_Trans_Key,
-        "Content-Type": "application/json",
-        "Authorization": "V2-HMAC-SHA256, Signature: " + signature,
-    };
-};
 var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, data, credentials, config, response, e_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var _a, data, _b, type, config, response, e_1;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                _a = preConfig.data, data = _a === void 0 ? {} : _a;
-                credentials = config_1.default.getInstance().getCredentials();
-                if (!credentials) {
+                _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.type, type = _b === void 0 ? '' : _b;
+                if (!config_1.default.getInstance().getCredentials()) {
                     return [2 /*return*/, {
                             error: 1,
                             message: 'Invalid credentials',
                         }];
                 }
-                config = __assign(__assign({}, preConfig), { headers: prepareHeaders(credentials, data) });
-                _b.label = 1;
+                config = __assign(__assign({}, preConfig), { headers: config_1.default.prepareHeaders(data, type) });
+                _c.label = 1;
             case 1:
-                _b.trys.push([1, 3, , 4]);
+                _c.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, axios_1.default(config)];
             case 2:
-                response = _b.sent();
+                response = _c.sent();
                 return [2 /*return*/, response.data];
             case 3:
-                e_1 = _b.sent();
+                e_1 = _c.sent();
                 return [2 /*return*/, e_1.response.data];
             case 4: return [2 /*return*/];
         }

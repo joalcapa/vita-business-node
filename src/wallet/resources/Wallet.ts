@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import {walletProvider} from '../../providers';
+import {walletProvider, transactionsProvider} from '../../providers';
 import BaseResource from './BaseResource';
 
 class Wallet extends BaseResource {
@@ -10,38 +10,34 @@ class Wallet extends BaseResource {
         clp: 0,
     }
 
-    public constructor(uuid: string = '') {
+    public constructor(uuid: string = '', created_at: string = '', is_master: boolean = false, balances: any = {clp: 0}) {
         super();
         this.uuid = uuid;
+        this.created_at = created_at;
+        this.is_master = is_master;
+        this.balances = balances;
     }
 
-    public get(uuid: string = '') {
+    public get() {
         return this.promise(async (resolve: any, reject: any) => {
-            const response: any = await walletProvider.getWallet(uuid);
-
+            const response: any = this.uuid ? await walletProvider.getWallet(this.uuid) : await walletProvider.getWallets();
             if (response.error) {
                 reject(response.error);
             } else {
-                const {wallet: {uuid, attributes: {created_at, is_master, balances}}} = response;
-
-                this.uuid = uuid;
-                this.created_at = created_at;
-                this.is_master = is_master;
-                this.balances = balances;
-
-                resolve(this);
-            }
-        });
-    }
-
-    public all() {
-        return this.promise(async (resolve: any, reject: any) => {
-            const response: any = await walletProvider.getWallets();
-
-            if (response.error) {
-                reject(response.error);
-            } else {
-
+                if (this.uuid) {
+                    const {wallet: {uuid, attributes: {created_at, is_master, balances}}} = response;
+                    this.uuid = uuid;
+                    this.created_at = created_at;
+                    this.is_master = is_master;
+                    this.balances = balances;
+                    resolve(this);
+                } else {
+                    const wallets = response.wallets.map((wallet: any) => {
+                        const {uuid, attributes: {created_at, is_master, balances}} = wallet;
+                        return new Wallet(uuid, created_at, is_master, balances);
+                    });
+                    resolve(wallets);
+                }
             }
         });
     }
@@ -50,8 +46,23 @@ class Wallet extends BaseResource {
         return this.promise(async (resolve: any, reject: any) => {
             if (!token)
                 token = crypto.randomBytes(64).toString('hex');
-
             const response: any = await walletProvider.createWallet(token);
+            if (response.error) {
+                reject(response.error);
+            } else {
+                const {wallet: {uuid, attributes: {created_at, is_master, balances}}} = response;
+                this.uuid = uuid;
+                this.created_at = created_at;
+                this.is_master = is_master;
+                this.balances = balances;
+                resolve(this);
+            }
+        });
+    }
+
+    public transactions() {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.getTransactions();
 
             if (response.error) {
                 reject(response.error);
@@ -68,15 +79,73 @@ class Wallet extends BaseResource {
         });
     }
 
-    public transactions() { }
+    public recharge(payload: any) {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.createRecharge({
+                wallet: this.uuid,
+                transactions_type: 'recharge',
+                ...payload,
+            });
 
-    public recharge() { }
+            if (response.error) {
+                reject(response.error);
+            } else {
 
-    public purchase() { }
+                resolve(this);
+            }
+        });
+    }
 
-    public withdrawal() { }
+    public purchase(payload: any) {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.createPurchase({
+                wallet: this.uuid,
+                transactions_type: 'purchase',
+                ...payload,
+            });
 
-    public send() { }
+            if (response.error) {
+                reject(response.error);
+            } else {
+
+                resolve(this);
+            }
+        });
+    }
+
+    public withdrawal(payload: any) {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.createWithdrawal({
+                wallet: this.uuid,
+                transactions_type: 'withdrawal',
+                ...payload,
+            });
+
+            if (response.error) {
+                reject(response.error);
+            } else {
+
+                resolve(this);
+            }
+        });
+    }
+
+    public send(payload: any) {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.createSend({
+                wallet: this.uuid,
+                transactions_type: 'send',
+                ...payload,
+            });
+
+            if (response.error) {
+                reject(response.error);
+            } else {
+
+                resolve(this);
+            }
+        });
+    }
 }
 
 export default Wallet;

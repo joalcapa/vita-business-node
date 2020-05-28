@@ -9,18 +9,21 @@ var getWallet = function (uuid) {
     return middleware_1.apiCall({
         url: config_1.default.getWalletsUrl() + "/" + uuid,
         method: 'get',
+        type: config_1.default.GET_WALLET,
     });
 };
 var getWallets = function () {
     return middleware_1.apiCall({
         url: config_1.default.getWalletsUrl(),
         method: 'get',
+        type: config_1.default.GET_WALLETS,
     });
 };
 var createWallet = function (token) {
     return middleware_1.apiCall({
         url: config_1.default.getWalletsUrl(),
         method: 'post',
+        type: config_1.default.CREATE_WALLET,
         data: { token: token },
     });
 };

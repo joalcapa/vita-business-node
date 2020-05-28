@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -57,8 +68,11 @@ var providers_1 = require("../../providers");
 var BaseResource_1 = __importDefault(require("./BaseResource"));
 var Wallet = /** @class */ (function (_super) {
     __extends(Wallet, _super);
-    function Wallet(uuid) {
+    function Wallet(uuid, created_at, is_master, balances) {
         if (uuid === void 0) { uuid = ''; }
+        if (created_at === void 0) { created_at = ''; }
+        if (is_master === void 0) { is_master = false; }
+        if (balances === void 0) { balances = { clp: 0 }; }
         var _this = _super.call(this) || this;
         _this.uuid = '';
         _this.created_at = '';
@@ -67,47 +81,48 @@ var Wallet = /** @class */ (function (_super) {
             clp: 0,
         };
         _this.uuid = uuid;
+        _this.created_at = created_at;
+        _this.is_master = is_master;
+        _this.balances = balances;
         return _this;
     }
-    Wallet.prototype.get = function (uuid) {
+    Wallet.prototype.get = function () {
         var _this = this;
-        if (uuid === void 0) { uuid = ''; }
         return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response, _a, uuid_1, _b, created_at, is_master, balances;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, providers_1.walletProvider.getWallet(uuid)];
+            var response, _a, _b, uuid, _c, created_at, is_master, balances, wallets;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (!this.uuid) return [3 /*break*/, 2];
+                        return [4 /*yield*/, providers_1.walletProvider.getWallet(this.uuid)];
                     case 1:
-                        response = _c.sent();
+                        _a = _d.sent();
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, providers_1.walletProvider.getWallets()];
+                    case 3:
+                        _a = _d.sent();
+                        _d.label = 4;
+                    case 4:
+                        response = _a;
                         if (response.error) {
                             reject(response.error);
                         }
                         else {
-                            _a = response.wallet, uuid_1 = _a.uuid, _b = _a.attributes, created_at = _b.created_at, is_master = _b.is_master, balances = _b.balances;
-                            this.uuid = uuid_1;
-                            this.created_at = created_at;
-                            this.is_master = is_master;
-                            this.balances = balances;
-                            resolve(this);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Wallet.prototype.all = function () {
-        var _this = this;
-        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, providers_1.walletProvider.getWallets()];
-                    case 1:
-                        response = _a.sent();
-                        if (response.error) {
-                            reject(response.error);
-                        }
-                        else {
+                            if (this.uuid) {
+                                _b = response.wallet, uuid = _b.uuid, _c = _b.attributes, created_at = _c.created_at, is_master = _c.is_master, balances = _c.balances;
+                                this.uuid = uuid;
+                                this.created_at = created_at;
+                                this.is_master = is_master;
+                                this.balances = balances;
+                                resolve(this);
+                            }
+                            else {
+                                wallets = response.wallets.map(function (wallet) {
+                                    var uuid = wallet.uuid, _a = wallet.attributes, created_at = _a.created_at, is_master = _a.is_master, balances = _a.balances;
+                                    return new Wallet(uuid, created_at, is_master, balances);
+                                });
+                                resolve(wallets);
+                            }
                         }
                         return [2 /*return*/];
                 }
@@ -143,11 +158,111 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
-    Wallet.prototype.transactions = function () { };
-    Wallet.prototype.recharge = function () { };
-    Wallet.prototype.purchase = function () { };
-    Wallet.prototype.withdrawal = function () { };
-    Wallet.prototype.send = function () { };
+    Wallet.prototype.transactions = function () {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response, _a, uuid, _b, created_at, is_master, balances;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.getTransactions()];
+                    case 1:
+                        response = _c.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            _a = response.wallet, uuid = _a.uuid, _b = _a.attributes, created_at = _b.created_at, is_master = _b.is_master, balances = _b.balances;
+                            this.uuid = uuid;
+                            this.created_at = created_at;
+                            this.is_master = is_master;
+                            this.balances = balances;
+                            resolve(this);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Wallet.prototype.recharge = function (payload) {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'recharge' }, payload))];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            resolve(this);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Wallet.prototype.purchase = function (payload) {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createPurchase(__assign({ wallet: this.uuid, transactions_type: 'purchase' }, payload))];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            resolve(this);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Wallet.prototype.withdrawal = function (payload) {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createWithdrawal(__assign({ wallet: this.uuid, transactions_type: 'withdrawal' }, payload))];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            resolve(this);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Wallet.prototype.send = function (payload) {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.transactionsProvider.createSend(__assign({ wallet: this.uuid, transactions_type: 'send' }, payload))];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            resolve(this);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Wallet;
 }(BaseResource_1.default));
 exports.default = Wallet;
