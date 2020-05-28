@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import endpoints from './endpoints';
 import {Credentials} from '../interfaces';
 
 class Configuration {
@@ -14,17 +15,6 @@ class Configuration {
     static PROD_URL: string = 'https://api.vitawallet.io/api/businesses';
     static QA: string = 'qa';
     static PROD: string = 'prod';
-
-    static CREATE_WALLET: string = 'WALLETS/CREATE_WALLET';
-    static GET_WALLET: string = 'WALLETS/GET_WALLET';
-    static GET_WALLETS: string = 'WALLETS/GET_WALLETS';
-
-    static GET_TRANSACTIONS: string = 'TRANSACTIONS/GET_TRANSACTIONS';
-    static GET_TRANSACTION: string = 'TRANSACTIONS/GET_TRANSACTION';
-    static CREATE_RECHARGE: string = 'TRANSACTIONS/CREATE_RECHARGE';
-    static CREATE_PURCHASE: string = 'TRANSACTIONS/CREATE_PURCHASE';
-    static CREATE_WITHDRAWAL: string = 'TRANSACTIONS/CREATE_WITHDRAWAL';
-    static CREATE_SEND: string = 'TRANSACTIONS/CREATE_SEND';
 
     private constructor() { }
 
@@ -69,32 +59,32 @@ class Configuration {
 
     public static prepareResult(hash: any, type: string) {
         switch(type) {
-            case Configuration.CREATE_WALLET: {
+            case endpoints.CREATE_WALLET: {
                 const {token} = hash;
                 return `token${token}`;
             }
-            case Configuration.GET_WALLETS: {
+            case endpoints.GET_WALLETS: {
                 return '';
             }
-            case Configuration.GET_WALLET: {
+            case endpoints.GET_WALLET: {
                 return '';
             }
-            case Configuration.GET_TRANSACTIONS: {
+            case endpoints.GET_TRANSACTIONS: {
                 return '';
             }
-            case Configuration.GET_TRANSACTION: {
+            case endpoints.GET_TRANSACTION: {
                 return '';
             }
-            case Configuration.CREATE_RECHARGE: {
+            case endpoints.CREATE_RECHARGE: {
                 return '';
             }
-            case Configuration.CREATE_PURCHASE: {
+            case endpoints.CREATE_PURCHASE: {
                 return '';
             }
-            case Configuration.CREATE_WITHDRAWAL: {
+            case endpoints.CREATE_WITHDRAWAL: {
                 return '';
             }
-            case Configuration.CREATE_SEND: {
+            case endpoints.CREATE_SEND: {
                 return '';
             }
             default: {

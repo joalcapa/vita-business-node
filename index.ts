@@ -6,13 +6,13 @@ Business.config({
     secret: 'secret',
     env: 'qa',
 });
-/*
+
 const f = async () => {
     try {
-        await Business.wallets('uuid start77').recharge({});
+        await Business.wallets('uuid start77');
     } catch (e) {
         console.log(e);
     }
 };
 
-f();*/
+f();

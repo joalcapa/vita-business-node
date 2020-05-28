@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var crypto_1 = __importDefault(require("crypto"));
+var endpoints_1 = __importDefault(require("./endpoints"));
 var Configuration = /** @class */ (function () {
     function Configuration() {
         this.credentials = {
@@ -45,32 +46,32 @@ var Configuration = /** @class */ (function () {
     };
     Configuration.prepareResult = function (hash, type) {
         switch (type) {
-            case Configuration.CREATE_WALLET: {
+            case endpoints_1.default.CREATE_WALLET: {
                 var token = hash.token;
                 return "token" + token;
             }
-            case Configuration.GET_WALLETS: {
+            case endpoints_1.default.GET_WALLETS: {
                 return '';
             }
-            case Configuration.GET_WALLET: {
+            case endpoints_1.default.GET_WALLET: {
                 return '';
             }
-            case Configuration.GET_TRANSACTIONS: {
+            case endpoints_1.default.GET_TRANSACTIONS: {
                 return '';
             }
-            case Configuration.GET_TRANSACTION: {
+            case endpoints_1.default.GET_TRANSACTION: {
                 return '';
             }
-            case Configuration.CREATE_RECHARGE: {
+            case endpoints_1.default.CREATE_RECHARGE: {
                 return '';
             }
-            case Configuration.CREATE_PURCHASE: {
+            case endpoints_1.default.CREATE_PURCHASE: {
                 return '';
             }
-            case Configuration.CREATE_WITHDRAWAL: {
+            case endpoints_1.default.CREATE_WITHDRAWAL: {
                 return '';
             }
-            case Configuration.CREATE_SEND: {
+            case endpoints_1.default.CREATE_SEND: {
                 return '';
             }
             default: {
@@ -97,15 +98,6 @@ var Configuration = /** @class */ (function () {
     Configuration.PROD_URL = 'https://api.vitawallet.io/api/businesses';
     Configuration.QA = 'qa';
     Configuration.PROD = 'prod';
-    Configuration.CREATE_WALLET = 'WALLETS/CREATE_WALLET';
-    Configuration.GET_WALLET = 'WALLETS/GET_WALLET';
-    Configuration.GET_WALLETS = 'WALLETS/GET_WALLETS';
-    Configuration.GET_TRANSACTIONS = 'TRANSACTIONS/GET_TRANSACTIONS';
-    Configuration.GET_TRANSACTION = 'TRANSACTIONS/GET_TRANSACTION';
-    Configuration.CREATE_RECHARGE = 'TRANSACTIONS/CREATE_RECHARGE';
-    Configuration.CREATE_PURCHASE = 'TRANSACTIONS/CREATE_PURCHASE';
-    Configuration.CREATE_WITHDRAWAL = 'TRANSACTIONS/CREATE_WITHDRAWAL';
-    Configuration.CREATE_SEND = 'TRANSACTIONS/CREATE_SEND';
     return Configuration;
 }());
 exports.default = Configuration;

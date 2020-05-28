@@ -1,11 +1,12 @@
 import Configuration from '../../config';
+import endpoints from '../../config/endpoints';
 import {apiCall} from '../../middlewares';
 
 const getWallet = (uuid: string) => {
     return apiCall({
         url: `${Configuration.getWalletsUrl()}/${uuid}`,
         method: 'get',
-        type: Configuration.GET_WALLET,
+        type: endpoints.GET_WALLET,
     });
 };
 
@@ -13,7 +14,7 @@ const getWallets = () => {
     return apiCall({
         url: Configuration.getWalletsUrl(),
         method: 'get',
-        type: Configuration.GET_WALLETS,
+        type: endpoints.GET_WALLETS,
     });
 };
 
@@ -21,7 +22,7 @@ const createWallet = (token: string) => {
     return apiCall({
         url: Configuration.getWalletsUrl(),
         method: 'post',
-        type: Configuration.CREATE_WALLET,
+        type: endpoints.CREATE_WALLET,
         data: {token},
     });
 }
