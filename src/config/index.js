@@ -21,7 +21,7 @@ var Configuration = /** @class */ (function () {
     };
     Configuration.isCredentials = function () {
         var _a = Configuration.getInstance().credentials, _b = _a.X_Login, X_Login = _b === void 0 ? null : _b, _c = _a.X_Trans_Key, X_Trans_Key = _c === void 0 ? null : _c, _d = _a.secret, secret = _d === void 0 ? null : _d, _e = _a.env, env = _e === void 0 ? null : _e;
-        return (X_Login && X_Trans_Key && secret && env && (env === 'qa' || env === 'prod'));
+        return (X_Login && X_Trans_Key && secret && env && (env === Configuration.QA || env === Configuration.PROD));
     };
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;

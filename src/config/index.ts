@@ -38,7 +38,7 @@ class Configuration {
 
     public static isCredentials() {
         const {X_Login = null, X_Trans_Key = null, secret = null, env = null} = Configuration.getInstance().credentials;
-        return (X_Login && X_Trans_Key && secret && env && (env === 'qa' || env === 'prod'));
+        return (X_Login && X_Trans_Key && secret && env && (env === Configuration.QA || env === Configuration.PROD));
     }
 
     public setCredentials(credentials: Credentials) {
