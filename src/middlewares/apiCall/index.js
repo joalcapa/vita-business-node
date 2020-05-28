@@ -53,18 +53,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var config_1 = __importDefault(require("../../config"));
 var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, data, _b, type, config, response, e_1;
+    var _a, data, _b, endpoint, config, response, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
-                _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.type, type = _b === void 0 ? '' : _b;
+                _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.endpoint, endpoint = _b === void 0 ? '' : _b;
                 if (!config_1.default.isCredentials()) {
                     return [2 /*return*/, {
                             error: 1,
                             message: 'Invalid credentials',
                         }];
                 }
-                config = __assign(__assign({}, preConfig), { headers: config_1.default.prepareHeaders(data, type) });
+                config = __assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint)), { headers: config_1.default.prepareHeaders(data, endpoint) });
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 3, , 4]);

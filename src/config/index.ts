@@ -35,6 +35,45 @@ class Configuration {
         this.credentials = credentials;
     }
 
+    public static getUri(endpoint: string) {
+        if (
+            endpoint === endpoints.CREATE_RECHARGE ||
+            endpoint === endpoints.CREATE_PURCHASE ||
+            endpoint === endpoints.CREATE_WITHDRAWAL ||
+            endpoint === endpoints.CREATE_SEND
+        ) {
+            return {
+                url: Configuration.getTransactionsUrl(),
+                method: 'post',
+            }
+        }
+
+        if (endpoint === endpoints.GET_TRANSACTIONS || endpoint === endpoints.GET_TRANSACTION) {
+            return {
+                url: Configuration.getTransactionsUrl(),
+                method: 'get',
+            }
+        }
+
+        if (endpoint === endpoints.GET_WALLETS || endpoint === endpoints.GET_WALLET) {
+            return {
+                url: Configuration.getWalletsUrl(),
+                method: 'get',
+            }
+        }
+
+        if (endpoint === endpoints.CREATE_WALLET)
+            return {
+                url: Configuration.getWalletsUrl(),
+                method: 'post',
+            }
+
+        return {
+            url: '',
+            method: '',
+        }
+    }
+
     public static getUrl() {
         return Configuration.instance.credentials.env === Configuration.PROD ?
             Configuration.PROD_URL :

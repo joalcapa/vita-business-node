@@ -3,28 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var config_1 = __importDefault(require("../../config"));
 var endpoints_1 = __importDefault(require("../../config/endpoints"));
 var middlewares_1 = require("../../middlewares");
 var getWallet = function (uuid) {
     return middlewares_1.apiCall({
-        url: config_1.default.getWalletsUrl() + "/" + uuid,
-        method: 'get',
-        type: endpoints_1.default.GET_WALLET,
+        endpoint: endpoints_1.default.GET_WALLET,
     });
 };
 var getWallets = function () {
     return middlewares_1.apiCall({
-        url: config_1.default.getWalletsUrl(),
-        method: 'get',
-        type: endpoints_1.default.GET_WALLETS,
+        endpoint: endpoints_1.default.GET_WALLETS,
     });
 };
 var createWallet = function (token) {
     return middlewares_1.apiCall({
-        url: config_1.default.getWalletsUrl(),
-        method: 'post',
-        type: endpoints_1.default.CREATE_WALLET,
+        endpoint: endpoints_1.default.CREATE_WALLET,
         data: { token: token },
     });
 };

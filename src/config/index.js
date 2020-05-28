@@ -27,6 +27,38 @@ var Configuration = /** @class */ (function () {
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;
     };
+    Configuration.getUri = function (endpoint) {
+        if (endpoint === endpoints_1.default.CREATE_RECHARGE ||
+            endpoint === endpoints_1.default.CREATE_PURCHASE ||
+            endpoint === endpoints_1.default.CREATE_WITHDRAWAL ||
+            endpoint === endpoints_1.default.CREATE_SEND) {
+            return {
+                url: Configuration.getTransactionsUrl(),
+                method: 'post',
+            };
+        }
+        if (endpoint === endpoints_1.default.GET_TRANSACTIONS || endpoint === endpoints_1.default.GET_TRANSACTION) {
+            return {
+                url: Configuration.getTransactionsUrl(),
+                method: 'get',
+            };
+        }
+        if (endpoint === endpoints_1.default.GET_WALLETS || endpoint === endpoints_1.default.GET_WALLET) {
+            return {
+                url: Configuration.getWalletsUrl(),
+                method: 'get',
+            };
+        }
+        if (endpoint === endpoints_1.default.CREATE_WALLET)
+            return {
+                url: Configuration.getWalletsUrl(),
+                method: 'post',
+            };
+        return {
+            url: '',
+            method: '',
+        };
+    };
     Configuration.getUrl = function () {
         return Configuration.instance.credentials.env === Configuration.PROD ?
             Configuration.PROD_URL :
