@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var crypto_1 = __importDefault(require("crypto"));
 var Configuration = /** @class */ (function () {
     function Configuration() {
-        this.credentials = null;
+        this.credentials = {
+            X_Login: '',
+            X_Trans_Key: '',
+            secret: '',
+            env: '',
+        };
     }
     Configuration.getInstance = function () {
         if (!Configuration.instance) {
@@ -14,16 +19,17 @@ var Configuration = /** @class */ (function () {
         }
         return Configuration.instance;
     };
-    Configuration.prototype.getCredentials = function () {
-        return this.credentials;
+    Configuration.isCredentials = function () {
+        var _a = Configuration.getInstance().credentials, _b = _a.X_Login, X_Login = _b === void 0 ? null : _b, _c = _a.X_Trans_Key, X_Trans_Key = _c === void 0 ? null : _c, _d = _a.secret, secret = _d === void 0 ? null : _d, _e = _a.env, env = _e === void 0 ? null : _e;
+        return (X_Login && X_Trans_Key && secret && env && (env === 'qa' || env === 'prod'));
     };
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;
     };
     Configuration.getUrl = function () {
-        return Configuration.instance.credentials.env === Configuration.QA ?
-            Configuration.QA_URL :
-            Configuration.PROD_URL;
+        return Configuration.instance.credentials.env === Configuration.PROD ?
+            Configuration.PROD_URL :
+            Configuration.QA_URL;
     };
     Configuration.getWalletsUrl = function () {
         return Configuration.getUrl() + "/wallets";

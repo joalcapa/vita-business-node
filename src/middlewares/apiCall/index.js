@@ -58,7 +58,7 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
         switch (_c.label) {
             case 0:
                 _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.type, type = _b === void 0 ? '' : _b;
-                if (!config_1.default.getInstance().getCredentials()) {
+                if (!config_1.default.isCredentials()) {
                     return [2 /*return*/, {
                             error: 1,
                             message: 'Invalid credentials',

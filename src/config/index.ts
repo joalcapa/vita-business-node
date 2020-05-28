@@ -1,8 +1,14 @@
 import crypto from 'crypto';
+import {Credentials} from '../interfaces';
 
 class Configuration {
     private static instance: Configuration;
-    private credentials: any = null;
+    private credentials: Credentials = {
+        X_Login: '',
+        X_Trans_Key: '',
+        secret: '',
+        env: '',
+    };
 
     static QA_URL: string = 'https://vita-wallet-api-qa-2.appspot.com/api/businesses';
     static PROD_URL: string = 'https://api.vitawallet.io/api/businesses';
@@ -30,18 +36,19 @@ class Configuration {
         return Configuration.instance;
     }
 
-    public getCredentials() {
-        return this.credentials;
+    public static isCredentials() {
+        const {X_Login = null, X_Trans_Key = null, secret = null, env = null} = Configuration.getInstance().credentials;
+        return (X_Login && X_Trans_Key && secret && env && (env === 'qa' || env === 'prod'));
     }
 
-    public setCredentials(credentials: object) {
+    public setCredentials(credentials: Credentials) {
         this.credentials = credentials;
     }
 
     public static getUrl() {
-        return Configuration.instance.credentials.env === Configuration.QA ?
-            Configuration.QA_URL :
-            Configuration.PROD_URL;
+        return Configuration.instance.credentials.env === Configuration.PROD ?
+            Configuration.PROD_URL :
+            Configuration.QA_URL;
     }
 
     public static getWalletsUrl() {

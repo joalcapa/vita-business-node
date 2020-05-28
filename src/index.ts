@@ -1,9 +1,10 @@
 import Configuration from './config';
+import {Credentials} from './interfaces';
 import {wallets} from './modules';
 
-export const config = (credentials: any) => {
+export const config = (credentials: Credentials) => {
     const {X_Login = null, X_Trans_Key = null, secret = null, env = null} = credentials;
-    if (X_Login && X_Trans_Key && secret && env && (env === 'qa' || env === 'prod'))
+    if (X_Login && X_Trans_Key && secret && env && (env === Configuration.QA || env === Configuration.PROD))
         Configuration.getInstance().setCredentials(credentials);
 };
 

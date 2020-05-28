@@ -4,7 +4,7 @@ import Configuration from '../../config';
 const apiCall = async (preConfig: any) => {
     const {data = {}, type = ''} = preConfig;
 
-    if (!Configuration.getInstance().getCredentials()) {
+    if (!Configuration.isCredentials()) {
         return {
             error: 1,
             message: 'Invalid credentials',
