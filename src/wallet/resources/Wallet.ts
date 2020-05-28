@@ -11,6 +11,7 @@ class Wallet extends BaseResource {
 
     public constructor(uuid: string = '', created_at: string = '', is_master: boolean = false, balances: any = {clp: 0}) {
         super();
+
         this.uuid = uuid;
         this.created_at = created_at;
         this.is_master = is_master;
@@ -86,12 +87,9 @@ class Wallet extends BaseResource {
                 ...payload,
             });
 
-            if (response.error) {
-                reject(response.error);
-            } else {
-
-                resolve(this);
-            }
+            response.error ?
+                reject(response.error) :
+                resolve(response);
         });
     }
 
@@ -106,8 +104,9 @@ class Wallet extends BaseResource {
             if (response.error) {
                 reject(response.error);
             } else {
-
-                resolve(this);
+                const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
+                this.balances = balances;
+                resolve(response);
             }
         });
     }
@@ -123,8 +122,9 @@ class Wallet extends BaseResource {
             if (response.error) {
                 reject(response.error);
             } else {
-
-                resolve(this);
+                const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
+                this.balances = balances;
+                resolve(response);
             }
         });
     }
@@ -140,8 +140,9 @@ class Wallet extends BaseResource {
             if (response.error) {
                 reject(response.error);
             } else {
-
-                resolve(this);
+                const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
+                this.balances = balances;
+                resolve(response);
             }
         });
     }

@@ -194,12 +194,9 @@ var Wallet = /** @class */ (function (_super) {
                         case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'recharge' }, payload))];
                         case 1:
                             response = _a.sent();
-                            if (response.error) {
-                                reject(response.error);
-                            }
-                            else {
-                                resolve(this);
-                            }
+                            response.error ?
+                                reject(response.error) :
+                                resolve(response);
                             return [2 /*return*/];
                     }
                 });
@@ -212,7 +209,7 @@ var Wallet = /** @class */ (function (_super) {
             if (resolve === void 0) { resolve = function () { }; }
             if (reject === void 0) { reject = function () { }; }
             return __awaiter(_this, void 0, void 0, function () {
-                var response;
+                var response, balances;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'purchase' }, payload))];
@@ -222,7 +219,9 @@ var Wallet = /** @class */ (function (_super) {
                                 reject(response.error);
                             }
                             else {
-                                resolve(this);
+                                balances = response.transaction.attributes.sender_wallet.balances;
+                                this.balances = balances;
+                                resolve(response);
                             }
                             return [2 /*return*/];
                     }
@@ -236,7 +235,7 @@ var Wallet = /** @class */ (function (_super) {
             if (resolve === void 0) { resolve = function () { }; }
             if (reject === void 0) { reject = function () { }; }
             return __awaiter(_this, void 0, void 0, function () {
-                var response;
+                var response, balances;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'withdrawal' }, payload))];
@@ -246,7 +245,9 @@ var Wallet = /** @class */ (function (_super) {
                                 reject(response.error);
                             }
                             else {
-                                resolve(this);
+                                balances = response.transaction.attributes.sender_wallet.balances;
+                                this.balances = balances;
+                                resolve(response);
                             }
                             return [2 /*return*/];
                     }
@@ -260,7 +261,7 @@ var Wallet = /** @class */ (function (_super) {
             if (resolve === void 0) { resolve = function () { }; }
             if (reject === void 0) { reject = function () { }; }
             return __awaiter(_this, void 0, void 0, function () {
-                var response;
+                var response, balances;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, providers_1.transactionsProvider.createRecharge(__assign({ wallet: this.uuid, transactions_type: 'send' }, payload))];
@@ -270,7 +271,9 @@ var Wallet = /** @class */ (function (_super) {
                                 reject(response.error);
                             }
                             else {
-                                resolve(this);
+                                balances = response.transaction.attributes.sender_wallet.balances;
+                                this.balances = balances;
+                                resolve(response);
                             }
                             return [2 /*return*/];
                     }
