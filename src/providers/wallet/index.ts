@@ -1,5 +1,5 @@
 import Configuration from '../../config';
-import {apiCall} from '../../middleware';
+import {apiCall} from '../../middlewares';
 
 const getWallet = (uuid: string) => {
     return apiCall({
