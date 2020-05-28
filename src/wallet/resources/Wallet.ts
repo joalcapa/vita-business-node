@@ -3,7 +3,6 @@ import {walletProvider, transactionsProvider} from '../../providers';
 import BaseResource from './BaseResource';
 
 class Wallet extends BaseResource {
-    private uuid: string = '';
     private created_at: string = '';
     private is_master: boolean = false;
     private balances: object = {
@@ -80,7 +79,7 @@ class Wallet extends BaseResource {
     }
 
     public recharge(payload: any) {
-        return this.promise(async (resolve: any, reject: any) => {
+        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
             const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'recharge',
@@ -97,8 +96,8 @@ class Wallet extends BaseResource {
     }
 
     public purchase(payload: any) {
-        return this.promise(async (resolve: any, reject: any) => {
-            const response: any = await transactionsProvider.createPurchase({
+        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+            const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'purchase',
                 ...payload,
@@ -114,8 +113,8 @@ class Wallet extends BaseResource {
     }
 
     public withdrawal(payload: any) {
-        return this.promise(async (resolve: any, reject: any) => {
-            const response: any = await transactionsProvider.createWithdrawal({
+        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+            const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'withdrawal',
                 ...payload,
@@ -131,8 +130,8 @@ class Wallet extends BaseResource {
     }
 
     public send(payload: any) {
-        return this.promise(async (resolve: any, reject: any) => {
-            const response: any = await transactionsProvider.createSend({
+        return this.createTransaction(async (resolve: any = () => {}, reject: any = () => {}) => {
+            const response: any = await transactionsProvider.createRecharge({
                 wallet: this.uuid,
                 transactions_type: 'send',
                 ...payload,

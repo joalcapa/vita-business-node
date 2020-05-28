@@ -9,7 +9,7 @@ Business.config({
 
 const f = async () => {
     try {
-        await Business.wallets('start477').get()
+        await Business.wallets('uuid start77').recharge({});
     } catch (e) {
         console.log(e);
     }
