@@ -10,13 +10,14 @@ Business.config({
 
 const f = async () => {
     try {
-        let wallets: Wallet = <Wallet> await Business.wallets().get();
-        console.log('Wallets: ', wallets);
+        /*let wallets: Wallet = <Wallet> await Business.wallets().get();
+        console.log('Wallets: ', wallets);*/
         const receive_wallet = '6fda8102-f09a-4e79-9bd0-2699948c8313';
         const sender_wallet = '6400990a-baae-4c5d-ac82-c282c1da6a7b';
-        let wallet: Wallet = <Wallet> await Business.wallets(sender_wallet).get();
-        const transactions = await wallet.transactions();
-        console.log('Wallet: ', wallet);
+        //let wallet: Wallet = <Wallet> await Business.wallets(sender_wallet).get();
+        let wallet2: Wallet = <Wallet> await Business.wallets('sender_wallet');
+        const transactions = await wallet2.transactions();
+        console.log('Wallet: ', wallet2);
         console.log('Transactions: ', transactions);
         /*const purchase = await wallet.purchase(
             {

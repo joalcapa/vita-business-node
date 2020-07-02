@@ -47,31 +47,27 @@ src_1.default.config({
     env: 'qa',
 });
 var f = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var wallets, receive_wallet, sender_wallet, wallet, transactions, e_1;
+    var receive_wallet, sender_wallet, wallet2, transactions, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
-                return [4 /*yield*/, src_1.default.wallets().get()];
-            case 1:
-                wallets = _a.sent();
-                console.log('Wallets: ', wallets);
+                _a.trys.push([0, 3, , 4]);
                 receive_wallet = '6fda8102-f09a-4e79-9bd0-2699948c8313';
                 sender_wallet = '6400990a-baae-4c5d-ac82-c282c1da6a7b';
-                return [4 /*yield*/, src_1.default.wallets(sender_wallet).get()];
+                return [4 /*yield*/, src_1.default.wallets('sender_wallet')];
+            case 1:
+                wallet2 = _a.sent();
+                return [4 /*yield*/, wallet2.transactions()];
             case 2:
-                wallet = _a.sent();
-                return [4 /*yield*/, wallet.transactions()];
-            case 3:
                 transactions = _a.sent();
-                console.log('Wallet: ', wallet);
+                console.log('Wallet: ', wallet2);
                 console.log('Transactions: ', transactions);
-                return [3 /*break*/, 5];
-            case 4:
+                return [3 /*break*/, 4];
+            case 3:
                 e_1 = _a.sent();
                 console.log(e_1);
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
