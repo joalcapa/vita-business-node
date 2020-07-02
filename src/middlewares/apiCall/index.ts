@@ -2,7 +2,7 @@ import axios from 'axios';
 import Configuration from '../../config';
 
 const apiCall = async (preConfig: any) => {
-    const {data = {}, endpoint = ''} = preConfig;
+    const {data = {}, resource = '', endpoint = ''} = preConfig;
 
     if (!Configuration.isCredentials()) {
         return {
@@ -13,7 +13,7 @@ const apiCall = async (preConfig: any) => {
 
     const config = {
         ...preConfig,
-        ...Configuration.getUri(endpoint),
+        ...Configuration.getUri(endpoint, resource),
         ...Configuration.prepareHeaders(data, endpoint),
     };
 

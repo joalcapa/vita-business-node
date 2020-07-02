@@ -41,26 +41,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var src_1 = __importDefault(require("./src"));
 src_1.default.config({
-    X_Login: 'X_Login',
-    X_Trans_Key: 'X_Trans_Key',
-    secret: 'secret',
+    X_Login: '0c8a34768609857c92384290e52b1c21544c84b2',
+    X_Trans_Key: '3LDn9e/oNtACL8sgmBkTtteSlqA=',
+    secret: '3ecd29fdcc92ab203d2eb51fa704806e8f0802b8',
     env: 'qa',
 });
 var f = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var e_1;
+    var wallets, receive_wallet, sender_wallet, wallet, transactions, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, src_1.default.wallets('uuid start77')];
+                _a.trys.push([0, 4, , 5]);
+                return [4 /*yield*/, src_1.default.wallets().get()];
             case 1:
-                _a.sent();
-                return [3 /*break*/, 3];
+                wallets = _a.sent();
+                console.log('Wallets: ', wallets);
+                receive_wallet = '6fda8102-f09a-4e79-9bd0-2699948c8313';
+                sender_wallet = '6400990a-baae-4c5d-ac82-c282c1da6a7b';
+                return [4 /*yield*/, src_1.default.wallets(sender_wallet).get()];
             case 2:
+                wallet = _a.sent();
+                return [4 /*yield*/, wallet.transactions()];
+            case 3:
+                transactions = _a.sent();
+                console.log('Wallet: ', wallet);
+                console.log('Transactions: ', transactions);
+                return [3 /*break*/, 5];
+            case 4:
                 e_1 = _a.sent();
                 console.log(e_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };

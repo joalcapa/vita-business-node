@@ -27,7 +27,8 @@ var Configuration = /** @class */ (function () {
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;
     };
-    Configuration.getUri = function (endpoint) {
+    Configuration.getUri = function (endpoint, resource) {
+        if (resource === void 0) { resource = ''; }
         if (endpoint === endpoints_1.default.CREATE_RECHARGE ||
             endpoint === endpoints_1.default.CREATE_PURCHASE ||
             endpoint === endpoints_1.default.CREATE_WITHDRAWAL ||
@@ -39,13 +40,13 @@ var Configuration = /** @class */ (function () {
         }
         if (endpoint === endpoints_1.default.GET_TRANSACTIONS || endpoint === endpoints_1.default.GET_TRANSACTION) {
             return {
-                url: Configuration.getTransactionsUrl(),
+                url: Configuration.getTransactionsUrl(resource),
                 method: 'get',
             };
         }
         if (endpoint === endpoints_1.default.GET_WALLETS || endpoint === endpoints_1.default.GET_WALLET) {
             return {
-                url: Configuration.getWalletsUrl(),
+                url: Configuration.getWalletsUrl(resource),
                 method: 'get',
             };
         }
@@ -64,11 +65,13 @@ var Configuration = /** @class */ (function () {
             Configuration.PROD_URL :
             Configuration.QA_URL;
     };
-    Configuration.getWalletsUrl = function () {
-        return Configuration.getUrl() + "/wallets";
+    Configuration.getWalletsUrl = function (resource) {
+        if (resource === void 0) { resource = ''; }
+        return Configuration.getUrl() + "/wallets/" + resource;
     };
-    Configuration.getTransactionsUrl = function () {
-        return Configuration.getUrl() + "/transactions";
+    Configuration.getTransactionsUrl = function (resource) {
+        if (resource === void 0) { resource = ''; }
+        return Configuration.getUrl() + "/transactions/" + resource;
     };
     Configuration.getPricesUrl = function () {
         return Configuration.getUrl() + "/prices";
@@ -95,16 +98,19 @@ var Configuration = /** @class */ (function () {
                 return '';
             }
             case endpoints_1.default.CREATE_RECHARGE: {
-                return '';
+                var _a = hash, currency = _a.currency, amount = _a.amount, url_cancel = _a.url_cancel, order = _a.order, url_complete = _a.url_complete, wallet = _a.wallet, transactions_type = _a.transactions_type;
+                return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "url_cancel" + url_cancel + "url_complete" + url_complete + "wallet" + wallet;
             }
             case endpoints_1.default.CREATE_PURCHASE: {
-                return '';
+                var _b = hash, currency = _b.currency, amount = _b.amount, order = _b.order, wallet = _b.wallet, transactions_type = _b.transactions_type;
+                return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet;
             }
             case endpoints_1.default.CREATE_WITHDRAWAL: {
                 return '';
             }
             case endpoints_1.default.CREATE_SEND: {
-                return '';
+                var _c = hash, currency = _c.currency, amount = _c.amount, order = _c.order, wallet = _c.wallet, wallet_recipient = _c.wallet_recipient, transactions_type = _c.transactions_type;
+                return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet + "wallet_recipient" + wallet_recipient;
             }
             default: {
                 return '';

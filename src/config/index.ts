@@ -1,6 +1,9 @@
 import crypto from 'crypto';
 import endpoints from './endpoints';
-import {Credentials, RequestCreateWallet} from '../interfaces';
+import {Credentials, RequestCreateWallet, RequestRecharge} from '../interfaces';
+import {RequestRechargeBusiness} from '../interfaces/requestRecharge';
+import {RequestSendBusiness} from '../interfaces/requestSend';
+import {RequestPurchaseBusiness} from '../interfaces/requestPurchase';
 
 class Configuration {
     private static instance: Configuration;
@@ -35,7 +38,7 @@ class Configuration {
         this.credentials = credentials;
     }
 
-    public static getUri(endpoint: string) {
+    public static getUri(endpoint: string, resource = '') {
         if (
             endpoint === endpoints.CREATE_RECHARGE ||
             endpoint === endpoints.CREATE_PURCHASE ||
@@ -50,14 +53,14 @@ class Configuration {
 
         if (endpoint === endpoints.GET_TRANSACTIONS || endpoint === endpoints.GET_TRANSACTION) {
             return {
-                url: Configuration.getTransactionsUrl(),
+                url: Configuration.getTransactionsUrl(resource),
                 method: 'get',
             }
         }
 
         if (endpoint === endpoints.GET_WALLETS || endpoint === endpoints.GET_WALLET) {
             return {
-                url: Configuration.getWalletsUrl(),
+                url: Configuration.getWalletsUrl(resource),
                 method: 'get',
             }
         }
@@ -80,12 +83,12 @@ class Configuration {
             Configuration.QA_URL;
     }
 
-    public static getWalletsUrl() {
-        return `${Configuration.getUrl()}/wallets`;
+    public static getWalletsUrl(resource = '') {
+        return `${Configuration.getUrl()}/wallets/${resource}`;
     }
 
-    public static getTransactionsUrl() {
-        return `${Configuration.getUrl()}/transactions`;
+    public static getTransactionsUrl(resource = '') {
+        return `${Configuration.getUrl()}/transactions/${resource}`;
     }
 
     public static getPricesUrl() {
@@ -115,16 +118,19 @@ class Configuration {
                 return '';
             }
             case endpoints.CREATE_RECHARGE: {
-                return '';
+                const {currency, amount, url_cancel, order, url_complete, wallet, transactions_type} = <RequestRechargeBusiness> hash;
+                return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}url_cancel${url_cancel}url_complete${url_complete}wallet${wallet}`;
             }
             case endpoints.CREATE_PURCHASE: {
-                return '';
+                const {currency, amount, order, wallet, transactions_type} = <RequestPurchaseBusiness> hash;
+                return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}wallet${wallet}`;
             }
             case endpoints.CREATE_WITHDRAWAL: {
                 return '';
             }
             case endpoints.CREATE_SEND: {
-                return '';
+                const {currency, amount, order, wallet, wallet_recipient, transactions_type} = <RequestSendBusiness> hash;
+                return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}wallet${wallet}wallet_recipient${wallet_recipient}`;
             }
             default: {
                 return '';

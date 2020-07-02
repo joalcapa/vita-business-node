@@ -1,5 +1,8 @@
 import endpoints from '../../config/endpoints';
 import {apiCall} from '../../middlewares';
+import {RequestRechargeBusiness} from '../../interfaces/requestRecharge';
+import {RequestSendBusiness} from '../../interfaces/requestSend';
+import {RequestPurchaseBusiness} from '../../interfaces/requestPurchase';
 
 const getTransactions = () => {
     return apiCall({
@@ -13,14 +16,14 @@ const getTransaction = (id: string) => {
     });
 };
 
-const createRecharge = (data: any) => {
+const createRecharge = (data: RequestRechargeBusiness) => {
     return apiCall({
         endpoint: endpoints.CREATE_RECHARGE,
         data,
     });
 };
 
-const createPurchase = (data: any) => {
+const createPurchase = (data: RequestPurchaseBusiness) => {
     return apiCall({
         endpoint: endpoints.CREATE_PURCHASE,
         data,
@@ -34,7 +37,7 @@ const createWithdrawal = (data: any) => {
     });
 };
 
-const createSend = (data: any) => {
+const createSend = (data: RequestSendBusiness) => {
     return apiCall({
         endpoint: endpoints.CREATE_SEND,
         data,

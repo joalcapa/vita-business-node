@@ -4,6 +4,7 @@ import {apiCall} from '../../middlewares';
 const getWallet = (uuid: string) => {
     return apiCall({
         endpoint: endpoints.GET_WALLET,
+        resource: uuid,
     });
 };
 

@@ -8,6 +8,7 @@ var middlewares_1 = require("../../middlewares");
 var getWallet = function (uuid) {
     return middlewares_1.apiCall({
         endpoint: endpoints_1.default.GET_WALLET,
+        resource: uuid,
     });
 };
 var getWallets = function () {
