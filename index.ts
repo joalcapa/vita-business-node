@@ -8,36 +8,11 @@ Business.config({
     env: 'qa',
 });
 
-const f = async () => {
+const recharge = async () => {
     try {
-        /*let wallets: Wallet = <Wallet> await Business.wallets().get();
-        console.log('Wallets: ', wallets);*/
-        const receive_wallet = '6fda8102-f09a-4e79-9bd0-2699948c8313';
-        const sender_wallet = '6400990a-baae-4c5d-ac82-c282c1da6a7b';
-        //let wallet: Wallet = <Wallet> await Business.wallets(sender_wallet).get();
-        let wallet2: Wallet = <Wallet> await Business.wallets('sender_wallet');
-        const transactions = await wallet2.transactions();
-        console.log('Wallet: ', wallet2);
-        console.log('Transactions: ', transactions);
-        /*const purchase = await wallet.purchase(
-            {
-                currency: 'clp',
-                order: crypto.randomBytes(64).toString('hex'),
-                amount: 80,
-            }
-        );
-        console.log('Purchase: ', purchase);*/
-        /*const send = await wallet.send(
-            {
-                currency: 'clp',
-                order: crypto.randomBytes(64).toString('hex'),
-                amount: 10,
-                wallet_recipient: receive_wallet,
-            }
-        );
-        console.log('Send: ', send);*/
-        //let wallet: Wallet = <Wallet> await Business.wallets().create('goodbb');
-        /*const recharge = await wallet.recharge({
+        //let wallet: Wallet = <Wallet> await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').get();
+        let wallet: Wallet = <Wallet> await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b');
+        const redirect_url = await wallet.recharge({
             currency: 'clp',
             order: crypto.randomBytes(64).toString('hex'),
             amount: 7777,
@@ -45,10 +20,10 @@ const f = async () => {
             url_cancel: 'https://ur.com/cancel',
         });
 
-        console.log('Recharga: ', recharge);*/
+        console.log('redirect_url for recharge: ', redirect_url);
     } catch (e) {
         console.log(e);
     }
 };
 
-f();
+recharge();

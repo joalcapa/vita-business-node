@@ -84,7 +84,7 @@ class Wallet extends Base {
 
             response.error ?
                 reject(response.error) :
-                resolve(response);
+                resolve(response.redirect_url);
         });
     }
 
@@ -119,7 +119,7 @@ class Wallet extends Base {
             } else {
                 const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
                 this.balances = balances;
-                resolve(response);
+                resolve(response.transaction);
             }
         });
     }
