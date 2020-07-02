@@ -84,7 +84,7 @@ class Wallet extends Base {
 
             response.error ?
                 reject(response.error) :
-                resolve(response.redirect_url);
+                resolve(response);
         });
     }
 

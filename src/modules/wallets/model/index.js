@@ -190,7 +190,7 @@ var Wallet = /** @class */ (function (_super) {
                         response = _a.sent();
                         response.error ?
                             reject(response.error) :
-                            resolve(response.redirect_url);
+                            resolve(response);
                         return [2 /*return*/];
                 }
             });
