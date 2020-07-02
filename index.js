@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var crypto_1 = __importDefault(require("crypto"));
 var src_1 = __importDefault(require("./src"));
 src_1.default.config({
     X_Login: '0c8a34768609857c92384290e52b1c21544c84b2',
@@ -46,22 +47,25 @@ src_1.default.config({
     secret: '3ecd29fdcc92ab203d2eb51fa704806e8f0802b8',
     env: 'qa',
 });
-var f = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var receive_wallet, sender_wallet, wallet2, transactions, e_1;
+var recharge = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var wallet, redirect_url, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 3, , 4]);
-                receive_wallet = '6fda8102-f09a-4e79-9bd0-2699948c8313';
-                sender_wallet = '6400990a-baae-4c5d-ac82-c282c1da6a7b';
-                return [4 /*yield*/, src_1.default.wallets('sender_wallet')];
+                return [4 /*yield*/, src_1.default.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b')];
             case 1:
-                wallet2 = _a.sent();
-                return [4 /*yield*/, wallet2.transactions()];
+                wallet = _a.sent();
+                return [4 /*yield*/, wallet.recharge({
+                        currency: 'clp',
+                        order: crypto_1.default.randomBytes(64).toString('hex'),
+                        amount: 7777,
+                        url_complete: 'https://ur.com/complete',
+                        url_cancel: 'https://ur.com/cancel',
+                    })];
             case 2:
-                transactions = _a.sent();
-                console.log('Wallet: ', wallet2);
-                console.log('Transactions: ', transactions);
+                redirect_url = _a.sent();
+                console.log('redirect_url for recharge: ', redirect_url);
                 return [3 /*break*/, 4];
             case 3:
                 e_1 = _a.sent();
@@ -71,4 +75,4 @@ var f = function () { return __awaiter(void 0, void 0, void 0, function () {
         }
     });
 }); };
-f();
+recharge();

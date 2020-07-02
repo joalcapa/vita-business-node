@@ -190,7 +190,7 @@ var Wallet = /** @class */ (function (_super) {
                         response = _a.sent();
                         response.error ?
                             reject(response.error) :
-                            resolve(response);
+                            resolve(response.redirect_url);
                         return [2 /*return*/];
                 }
             });
@@ -233,7 +233,7 @@ var Wallet = /** @class */ (function (_super) {
                         else {
                             balances = response.transaction.attributes.sender_wallet.balances;
                             this.balances = balances;
-                            resolve(response);
+                            resolve(response.transaction);
                         }
                         return [2 /*return*/];
                 }
