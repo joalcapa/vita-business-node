@@ -1,7 +1,7 @@
 import Banks from './model';
 
-const banks = (): Banks => {
-    return new Banks();
+const banks = (iso_code: string = ''): Banks => {
+    return new Banks(iso_code);
 };
 
 export default banks;

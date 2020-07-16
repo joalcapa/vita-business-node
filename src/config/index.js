@@ -27,7 +27,7 @@ var Configuration = /** @class */ (function () {
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;
     };
-    Configuration.getUri = function (endpoint, resource) {
+    Configuration.getUri = function (endpoint, resource, params) {
         if (resource === void 0) { resource = ''; }
         if (endpoint === endpoints_1.default.CREATE_RECHARGE ||
             endpoint === endpoints_1.default.CREATE_PURCHASE ||
@@ -57,8 +57,9 @@ var Configuration = /** @class */ (function () {
             };
         }
         if (endpoint === endpoints_1.default.GET_BANKS) {
+            var iso_code = params.iso_code;
             return {
-                url: Configuration.getBanksUrl(),
+                url: Configuration.getBanksUrl() + "?country=" + iso_code,
                 method: 'get',
             };
         }

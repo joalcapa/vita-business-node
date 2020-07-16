@@ -4,6 +4,7 @@ import {Credentials, RequestCreateWallet, RequestRecharge} from '../interfaces';
 import {RequestRechargeBusiness} from '../interfaces/requestRecharge';
 import {RequestSendBusiness} from '../interfaces/requestSend';
 import {RequestPurchaseBusiness} from '../interfaces/requestPurchase';
+import RequestBanks from '../interfaces/requestBanks';
 
 class Configuration {
     private static instance: Configuration;
@@ -38,7 +39,7 @@ class Configuration {
         this.credentials = credentials;
     }
 
-    public static getUri(endpoint: string, resource = '') {
+    public static getUri(endpoint: string, resource = '', params: {}) {
         if (
             endpoint === endpoints.CREATE_RECHARGE ||
             endpoint === endpoints.CREATE_PURCHASE ||
@@ -73,8 +74,9 @@ class Configuration {
         }
 
         if (endpoint === endpoints.GET_BANKS) {
+            const {iso_code} = <RequestBanks> params;
             return {
-                url: Configuration.getBanksUrl(),
+                url: `${Configuration.getBanksUrl()}?country=${iso_code}`,
                 method: 'get',
             }
         }

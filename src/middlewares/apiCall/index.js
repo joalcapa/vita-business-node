@@ -53,27 +53,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var config_1 = __importDefault(require("../../config"));
 var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, data, _b, resource, _c, endpoint, config, response, e_1;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
+    var _a, data, _b, resource, _c, endpoint, _d, params, config, response, e_1;
+    return __generator(this, function (_e) {
+        switch (_e.label) {
             case 0:
-                _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.resource, resource = _b === void 0 ? '' : _b, _c = preConfig.endpoint, endpoint = _c === void 0 ? '' : _c;
+                _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.resource, resource = _b === void 0 ? '' : _b, _c = preConfig.endpoint, endpoint = _c === void 0 ? '' : _c, _d = preConfig.params, params = _d === void 0 ? {} : _d;
                 if (!config_1.default.isCredentials()) {
                     return [2 /*return*/, {
                             error: 1,
                             message: 'Invalid credentials',
                         }];
                 }
-                config = __assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint, resource)), config_1.default.prepareHeaders(data, endpoint));
-                _d.label = 1;
+                config = __assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint, resource, params)), config_1.default.prepareHeaders(data, endpoint));
+                _e.label = 1;
             case 1:
-                _d.trys.push([1, 3, , 4]);
+                _e.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, axios_1.default(config)];
             case 2:
-                response = _d.sent();
+                response = _e.sent();
                 return [2 /*return*/, response.data];
             case 3:
-                e_1 = _d.sent();
+                e_1 = _e.sent();
                 return [2 /*return*/, e_1.response.data];
             case 4: return [2 /*return*/];
         }

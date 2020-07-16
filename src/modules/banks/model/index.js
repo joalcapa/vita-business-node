@@ -56,24 +56,43 @@ var base_1 = __importDefault(require("./base"));
 var providers_1 = require("../../../providers");
 var Bank = /** @class */ (function (_super) {
     __extends(Bank, _super);
-    function Bank() {
-        return _super.call(this) || this;
+    function Bank(iso_code, length_of_checking_account_number, length_of_savings_account_number, name, bank_code) {
+        if (length_of_checking_account_number === void 0) { length_of_checking_account_number = null; }
+        if (length_of_savings_account_number === void 0) { length_of_savings_account_number = null; }
+        if (name === void 0) { name = ''; }
+        if (bank_code === void 0) { bank_code = null; }
+        var _this = _super.call(this) || this;
+        _this.iso_code = '';
+        _this.length_of_checking_account_number = null;
+        _this.length_of_savings_account_number = null;
+        _this.name = '';
+        _this.bank_code = null;
+        _this.iso_code = iso_code.toUpperCase();
+        _this.length_of_checking_account_number = length_of_checking_account_number;
+        _this.length_of_savings_account_number = length_of_savings_account_number;
+        _this.name = name;
+        _this.bank_code = bank_code;
+        return _this;
     }
     Bank.prototype.get = function () {
         var _this = this;
         return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response;
+            var response, banks;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, providers_1.bankProvider.getBanks()];
+                    case 0: return [4 /*yield*/, providers_1.bankProvider.getBanks(this.iso_code)];
                     case 1:
                         response = _a.sent();
                         if (response.error) {
                             reject(response.error);
                         }
                         else {
-                            console.log(response);
-                            resolve(response);
+                            banks = response.banks.map(function (bank) {
+                                var _a = bank.attributes, length_of_checking_account_number = _a.length_of_checking_account_number, length_of_savings_account_number = _a.length_of_savings_account_number, name = _a.name, bank_code = _a.bank_code;
+                                return new Bank(_this.iso_code, length_of_checking_account_number, length_of_savings_account_number, name, bank_code);
+                            });
+                            resolve(banks);
                         }
                         return [2 /*return*/];
                 }
