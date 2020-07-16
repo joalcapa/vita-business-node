@@ -5,6 +5,7 @@ import {RequestRechargeBusiness} from '../interfaces/requestRecharge';
 import {RequestSendBusiness} from '../interfaces/requestSend';
 import {RequestPurchaseBusiness} from '../interfaces/requestPurchase';
 import RequestBanks from '../interfaces/requestBanks';
+import RequestWallets from '../interfaces/requestWallets';
 
 class Configuration {
     private static instance: Configuration;
@@ -60,8 +61,14 @@ class Configuration {
         }
 
         if (endpoint === endpoints.GET_WALLETS || endpoint === endpoints.GET_WALLET) {
+            let url = Configuration.getWalletsUrl(resource);
+            if (params.hasOwnProperty('is_master')) {
+                const {is_master} = <RequestWallets> params;
+                url = `${url}?is_master=${is_master}`;
+            }
+
             return {
-                url: Configuration.getWalletsUrl(resource),
+                url,
                 method: 'get',
             }
         }

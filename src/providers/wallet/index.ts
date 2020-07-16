@@ -21,8 +21,18 @@ const createWallet = (token: string) => {
     });
 }
 
+const getWalletMaster = () => {
+    return apiCall({
+        endpoint: endpoints.GET_WALLETS,
+        params: {
+            is_master: true,
+        },
+    });
+};
+
 export default {
     getWallet,
     getWallets,
     createWallet,
+    getWalletMaster
 };

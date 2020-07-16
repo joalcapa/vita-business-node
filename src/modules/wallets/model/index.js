@@ -88,6 +88,30 @@ var Wallet = /** @class */ (function (_super) {
         _this.token = token;
         return _this;
     }
+    Wallet.prototype.getMaster = function () {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response, wallets;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.walletProvider.getWalletMaster()];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            wallets = response.wallets.map(function (wallet) {
+                                var uuid = wallet.uuid, _a = wallet.attributes, token = _a.token, created_at = _a.created_at, is_master = _a.is_master, balances = _a.balances;
+                                return new Wallet(uuid, created_at, is_master, balances, token);
+                            });
+                            resolve(wallets);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Wallet.prototype.get = function () {
         var _this = this;
         return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {

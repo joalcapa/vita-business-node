@@ -45,8 +45,13 @@ var Configuration = /** @class */ (function () {
             };
         }
         if (endpoint === endpoints_1.default.GET_WALLETS || endpoint === endpoints_1.default.GET_WALLET) {
+            var url = Configuration.getWalletsUrl(resource);
+            if (params.hasOwnProperty('is_master')) {
+                var is_master = params.is_master;
+                url = url + "?is_master=" + is_master;
+            }
             return {
-                url: Configuration.getWalletsUrl(resource),
+                url: url,
                 method: 'get',
             };
         }

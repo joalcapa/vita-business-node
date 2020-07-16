@@ -22,8 +22,17 @@ var createWallet = function (token) {
         data: { token: token },
     });
 };
+var getWalletMaster = function () {
+    return middlewares_1.apiCall({
+        endpoint: endpoints_1.default.GET_WALLETS,
+        params: {
+            is_master: true,
+        },
+    });
+};
 exports.default = {
     getWallet: getWallet,
     getWallets: getWallets,
     createWallet: createWallet,
+    getWalletMaster: getWalletMaster
 };

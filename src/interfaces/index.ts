@@ -5,3 +5,4 @@ export {default as RequestWithdrawal} from './requestWithdrawal';
 export {default as RequestSend} from './requestSend';
 export {default as RequestCreateWallet} from './requestCreateWallet';
 export {default as RequestBanks} from './requestBanks';
+export {default as RequestWallets} from './requestWallets';

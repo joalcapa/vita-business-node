@@ -21,6 +21,21 @@ class Wallet extends Base {
         this.token = token;
     }
 
+    public getMaster() {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await walletProvider.getWalletMaster();
+            if (response.error) {
+                reject(response.error);
+            } else {
+                const wallets = response.wallets.map((wallet: any) => {
+                    const {uuid, attributes: {token, created_at, is_master, balances}} = wallet;
+                    return new Wallet(uuid, created_at, is_master, balances, token);
+                });
+                resolve(wallets);
+            }
+        });
+    }
+
     public get() {
         return this.promise(async (resolve: any, reject: any) => {
             const response: any = this.uuid ? await walletProvider.getWallet(this.uuid) : await walletProvider.getWallets();
