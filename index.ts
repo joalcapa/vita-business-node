@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import Business, {Wallet} from './src';
+import Business, {Wallet, Bank} from './src';
 
 Business.config({
     X_Login: '0c8a34768609857c92384290e52b1c21544c84b2',
@@ -26,4 +26,15 @@ const recharge = async () => {
     }
 };
 
-recharge();
+const banks = async () => {
+   try {
+       let banks: Bank = <Bank> await Business.banks();
+       const banksAll = await banks.get();
+       console.log('banks: ', banksAll);
+   } catch (e) {
+       console.log(e);
+   }
+};
+
+// recharge();
+banks();

@@ -65,11 +65,19 @@ class Configuration {
             }
         }
 
-        if (endpoint === endpoints.CREATE_WALLET)
+        if (endpoint === endpoints.CREATE_WALLET) {
             return {
                 url: Configuration.getWalletsUrl(),
                 method: 'post',
             }
+        }
+
+        if (endpoint === endpoints.GET_BANKS) {
+            return {
+                url: Configuration.getBanksUrl(),
+                method: 'get',
+            }
+        }
 
         return {
             url: '',

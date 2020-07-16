@@ -1,7 +1,8 @@
 import Configuration from './config';
 import {Credentials} from './interfaces';
-import {wallets} from './modules';
+import {wallets, banks} from './modules';
 export {default as Wallet} from './modules/wallets/model';
+export {default as Bank} from './modules/banks/model';
 
 export const config = (credentials: Credentials) => {
     const {X_Login = null, X_Trans_Key = null, secret = null, env = null} = credentials;
@@ -12,4 +13,5 @@ export const config = (credentials: Credentials) => {
 export default {
     config,
     wallets,
+    banks,
 };

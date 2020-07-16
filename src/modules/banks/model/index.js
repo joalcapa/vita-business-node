@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -39,63 +52,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var crypto_1 = __importDefault(require("crypto"));
-var src_1 = __importDefault(require("./src"));
-src_1.default.config({
-    X_Login: '0c8a34768609857c92384290e52b1c21544c84b2',
-    X_Trans_Key: '3LDn9e/oNtACL8sgmBkTtteSlqA=',
-    secret: '3ecd29fdcc92ab203d2eb51fa704806e8f0802b8',
-    env: 'qa',
-});
-var recharge = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var wallet, redirect_url, e_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, src_1.default.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b')];
-            case 1:
-                wallet = _a.sent();
-                return [4 /*yield*/, wallet.recharge({
-                        currency: 'clp',
-                        order: crypto_1.default.randomBytes(64).toString('hex'),
-                        amount: 7777,
-                        url_complete: 'https://ur.com/complete',
-                        url_cancel: 'https://ur.com/cancel',
-                    })];
-            case 2:
-                redirect_url = _a.sent();
-                console.log('redirect_url for recharge: ', redirect_url);
-                return [3 /*break*/, 4];
-            case 3:
-                e_1 = _a.sent();
-                console.log(e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var banks = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var banks_1, banksAll, e_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, src_1.default.banks()];
-            case 1:
-                banks_1 = _a.sent();
-                return [4 /*yield*/, banks_1.get()];
-            case 2:
-                banksAll = _a.sent();
-                console.log('banks: ', banksAll);
-                return [3 /*break*/, 4];
-            case 3:
-                e_2 = _a.sent();
-                console.log(e_2);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-// recharge();
-banks();
+var base_1 = __importDefault(require("./base"));
+var providers_1 = require("../../../providers");
+var Bank = /** @class */ (function (_super) {
+    __extends(Bank, _super);
+    function Bank() {
+        return _super.call(this) || this;
+    }
+    Bank.prototype.get = function () {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.bankProvider.getBanks()];
+                    case 1:
+                        response = _a.sent();
+                        if (response.error) {
+                            reject(response.error);
+                        }
+                        else {
+                            console.log(response);
+                            resolve(response);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    return Bank;
+}(base_1.default));
+exports.default = Bank;

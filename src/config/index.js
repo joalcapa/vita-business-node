@@ -50,11 +50,18 @@ var Configuration = /** @class */ (function () {
                 method: 'get',
             };
         }
-        if (endpoint === endpoints_1.default.CREATE_WALLET)
+        if (endpoint === endpoints_1.default.CREATE_WALLET) {
             return {
                 url: Configuration.getWalletsUrl(),
                 method: 'post',
             };
+        }
+        if (endpoint === endpoints_1.default.GET_BANKS) {
+            return {
+                url: Configuration.getBanksUrl(),
+                method: 'get',
+            };
+        }
         return {
             url: '',
             method: '',
