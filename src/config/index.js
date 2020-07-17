@@ -68,6 +68,12 @@ var Configuration = /** @class */ (function () {
                 method: 'get',
             };
         }
+        if (endpoint === endpoints_1.default.GET_PRICES) {
+            return {
+                url: Configuration.getPricesUrl(),
+                method: 'get',
+            };
+        }
         return {
             url: '',
             method: '',

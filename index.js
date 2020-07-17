@@ -119,6 +119,26 @@ var master = function () { return __awaiter(void 0, void 0, void 0, function () 
         }
     });
 }); };
+var prices = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var prices_1, e_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, src_1.default.prices().get()];
+            case 1:
+                prices_1 = _a.sent();
+                console.log('prices: ', prices_1.withdrawal.prices.attributes);
+                return [3 /*break*/, 3];
+            case 2:
+                e_4 = _a.sent();
+                console.log(e_4);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 // recharge();
 // banks();
-master();
+// master();
+prices();

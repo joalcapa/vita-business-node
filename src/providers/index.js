@@ -6,3 +6,5 @@ var transactions_1 = require("./transactions");
 Object.defineProperty(exports, "transactionsProvider", { enumerable: true, get: function () { return transactions_1.default; } });
 var banks_1 = require("./banks");
 Object.defineProperty(exports, "bankProvider", { enumerable: true, get: function () { return banks_1.default; } });
+var prices_1 = require("./prices");
+Object.defineProperty(exports, "pricesProvider", { enumerable: true, get: function () { return prices_1.default; } });

@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import Business, {Wallet, Bank} from './src';
+import Business, {Wallet, Bank, Price} from './src';
 
 Business.config({
     X_Login: 'e65828b2cf13b7eb125e5b855bfbdee4e4b51d00',
@@ -46,6 +46,16 @@ const master = async () => {
     }
 };
 
+const prices = async () => {
+    try {
+        const prices: any = await Business.prices().get();
+        console.log('prices: ', prices.withdrawal.prices.attributes);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 // recharge();
 // banks();
-master();
+// master();
+prices();

@@ -11,6 +11,8 @@ const CREATE_SEND: string = 'TRANSACTIONS/CREATE_SEND';
 
 const GET_BANKS: string = 'BANKS/GET_BANKS';
 
+const GET_PRICES: string = 'PRICES/GET_PRICES';
+
 export default {
     CREATE_WALLET,
     GET_WALLET,
@@ -22,4 +24,5 @@ export default {
     CREATE_WITHDRAWAL,
     CREATE_SEND,
     GET_BANKS,
+    GET_PRICES,
 };

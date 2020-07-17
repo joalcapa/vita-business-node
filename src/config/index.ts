@@ -88,6 +88,13 @@ class Configuration {
             }
         }
 
+        if (endpoint === endpoints.GET_PRICES) {
+            return {
+                url: Configuration.getPricesUrl(),
+                method: 'get',
+            }
+        }
+
         return {
             url: '',
             method: '',
