@@ -57,7 +57,7 @@ const prices = async () => {
 
 const transactions = async () => {
     try {
-        const transactions = await Business.transactions().get();
+        const transactions = await Business.transactions(190).get();
         console.log('transactions: ', transactions);
     } catch (e) {
         console.log(e);

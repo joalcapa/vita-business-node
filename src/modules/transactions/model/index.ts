@@ -57,6 +57,7 @@ class Transaction extends Base {
     public get() {
         return this.promise(async (resolve: any, reject: any) => {
             const response: any = this.id ? await transactionsProvider.getTransaction(this.id) : await transactionsProvider.getTransactions();
+
             if (response.error) {
                 reject(response.error);
             } else {

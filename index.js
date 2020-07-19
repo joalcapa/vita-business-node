@@ -144,7 +144,7 @@ var transactions = function () { return __awaiter(void 0, void 0, void 0, functi
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, src_1.default.transactions().get()];
+                return [4 /*yield*/, src_1.default.transactions(190).get()];
             case 1:
                 transactions_1 = _a.sent();
                 console.log('transactions: ', transactions_1);
