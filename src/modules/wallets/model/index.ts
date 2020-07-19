@@ -11,7 +11,13 @@ class Wallet extends Base {
         clp: 0,
     }
 
-    public constructor(uuid: string = '', created_at: string = '', is_master: boolean = false, balances: any = {clp: 0}, token: string = '') {
+    public constructor(
+        uuid: string = '',
+        created_at: string = '',
+        is_master: boolean = false,
+        balances: any = {clp: 0},
+        token: string = ''
+    ) {
         super();
 
         this.uuid = uuid;

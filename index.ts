@@ -55,7 +55,17 @@ const prices = async () => {
     }
 };
 
+const transactions = async () => {
+    try {
+        const transactions = await Business.transactions().get();
+        console.log('transactions: ', transactions);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 // recharge();
 // banks();
 // master();
-prices();
+// prices();
+transactions();

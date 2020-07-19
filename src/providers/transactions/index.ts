@@ -10,9 +10,10 @@ const getTransactions = () => {
     });
 };
 
-const getTransaction = (id: string) => {
+const getTransaction = (id: string = '') => {
     return apiCall({
         endpoint: endpoints.GET_TRANSACTIONS,
+        resource: id,
     });
 };
 

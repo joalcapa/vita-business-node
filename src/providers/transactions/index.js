@@ -11,8 +11,10 @@ var getTransactions = function () {
     });
 };
 var getTransaction = function (id) {
+    if (id === void 0) { id = ''; }
     return middlewares_1.apiCall({
         endpoint: endpoints_1.default.GET_TRANSACTIONS,
+        resource: id,
     });
 };
 var createRecharge = function (data) {

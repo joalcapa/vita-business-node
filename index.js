@@ -138,7 +138,27 @@ var prices = function () { return __awaiter(void 0, void 0, void 0, function () 
         }
     });
 }); };
+var transactions = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var transactions_1, e_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, src_1.default.transactions().get()];
+            case 1:
+                transactions_1 = _a.sent();
+                console.log('transactions: ', transactions_1);
+                return [3 /*break*/, 3];
+            case 2:
+                e_5 = _a.sent();
+                console.log(e_5);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 // recharge();
 // banks();
 // master();
-prices();
+// prices();
+transactions();
