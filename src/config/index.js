@@ -140,9 +140,11 @@ var Configuration = /** @class */ (function () {
         var _a = Configuration.instance.credentials, X_Login = _a.X_Login, X_Trans_Key = _a.X_Trans_Key, secret = _a.secret;
         var X_Date = new Date().toISOString();
         var result = Configuration.prepareResult(hash, type);
-        var signature = crypto_1.default.createHmac('sha256', secret);
-        signature.update("" + X_Login + X_Date + result);
-        signature = signature.digest('hex');
+        var hmac = crypto_1.default.createHmac('sha256', secret);
+        hmac.setEncoding('hex');
+        hmac.write("" + X_Login + X_Date + result);
+        hmac.end();
+        var signature = hmac.read();
         return {
             headers: {
                 "X-Date": X_Date,

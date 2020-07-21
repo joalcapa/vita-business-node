@@ -167,9 +167,11 @@ class Configuration {
         const X_Date = new Date().toISOString();
         const result = Configuration.prepareResult(hash, type);
 
-        let signature: any = crypto.createHmac('sha256', secret);
-        signature.update(`${X_Login}${X_Date}${result}`);
-        signature = signature.digest('hex');
+        let hmac = crypto.createHmac('sha256', secret);
+        hmac.setEncoding('hex');
+        hmac.write(`${X_Login}${X_Date}${result}`);
+        hmac.end();
+        const signature = hmac.read() as string;
 
         return {
             headers: {

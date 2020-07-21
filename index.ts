@@ -10,9 +10,7 @@ Business.config({
 
 const recharge = async () => {
     try {
-        //let wallet: Wallet = <Wallet> await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').get();
-        let wallet: Wallet = <Wallet> await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b');
-        const redirect_url = await wallet.recharge({
+        const redirect_url = await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').recharge({
             currency: 'clp',
             order: crypto.randomBytes(64).toString('hex'),
             amount: 7777,
@@ -25,6 +23,33 @@ const recharge = async () => {
         console.log(e);
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const banks = async () => {
    try {
@@ -64,8 +89,8 @@ const transactions = async () => {
     }
 };
 
-// recharge();
+recharge();
 // banks();
 // master();
 // prices();
-transactions();
+// transactions();

@@ -48,30 +48,27 @@ src_1.default.config({
     env: 'qa',
 });
 var recharge = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var wallet, redirect_url, e_1;
+    var redirect_url, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, src_1.default.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b')];
-            case 1:
-                wallet = _a.sent();
-                return [4 /*yield*/, wallet.recharge({
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, src_1.default.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').recharge({
                         currency: 'clp',
                         order: crypto_1.default.randomBytes(64).toString('hex'),
                         amount: 7777,
                         url_complete: 'https://ur.com/complete',
                         url_cancel: 'https://ur.com/cancel',
                     })];
-            case 2:
+            case 1:
                 redirect_url = _a.sent();
                 console.log('redirect_url for recharge: ', redirect_url);
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 e_1 = _a.sent();
                 console.log(e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
@@ -157,8 +154,8 @@ var transactions = function () { return __awaiter(void 0, void 0, void 0, functi
         }
     });
 }); };
-// recharge();
+recharge();
 // banks();
 // master();
 // prices();
-transactions();
+// transactions();
