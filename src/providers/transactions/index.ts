@@ -3,6 +3,7 @@ import {apiCall} from '../../middlewares';
 import {RequestRechargeBusiness} from '../../interfaces/requestRecharge';
 import {RequestSendBusiness} from '../../interfaces/requestSend';
 import {RequestPurchaseBusiness} from '../../interfaces/requestPurchase';
+import {RequestWithdrawalBusiness} from '../../interfaces/requestWithdrawal';
 
 const getTransactions = () => {
     return apiCall({
@@ -31,7 +32,7 @@ const createPurchase = (data: RequestPurchaseBusiness) => {
     });
 };
 
-const createWithdrawal = (data: any) => {
+const createWithdrawal = (data: RequestWithdrawalBusiness) => {
     return apiCall({
         endpoint: endpoints.CREATE_WITHDRAWAL,
         data,

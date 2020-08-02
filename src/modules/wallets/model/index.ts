@@ -127,6 +127,24 @@ class Wallet extends Base {
         });
     }
 
+    public withdrawal(request: RequestWithdrawal) {
+        return this.createTransaction(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.createWithdrawal({
+                wallet: this.uuid,
+                transactions_type: 'withdrawal',
+                ...request,
+            });
+
+            if (response.error) {
+                reject(response.error);
+            } else {
+                const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
+                this.balances = balances;
+                resolve(response.transaction);
+            }
+        });
+    }
+
     public purchase(request: RequestPurchase) {
         return this.createTransaction(async (resolve: any, reject: any) => {
             const response: any = await transactionsProvider.createPurchase({

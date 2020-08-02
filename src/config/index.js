@@ -125,10 +125,11 @@ var Configuration = /** @class */ (function () {
                 return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet;
             }
             case endpoints_1.default.CREATE_WITHDRAWAL: {
-                return '';
+                var _c = hash, url_notify = _c.url_notify, beneficiary_document_type = _c.beneficiary_document_type, beneficiary_document_number = _c.beneficiary_document_number, account_type_bank = _c.account_type_bank, account_bank = _c.account_bank, bank_code = _c.bank_code, beneficiary_email = _c.beneficiary_email, beneficiary_address = _c.beneficiary_address, beneficiary_last_name = _c.beneficiary_last_name, beneficiary_first_name = _c.beneficiary_first_name, purpose_comentary = _c.purpose_comentary, purpose = _c.purpose, country = _c.country, currency = _c.currency, order = _c.order, amount = _c.amount, wallet = _c.wallet, transactions_type = _c.transactions_type;
+                return "account_bank" + account_bank + "account_type_bank" + account_type_bank + "amount" + amount + "bank_code" + bank_code + "beneficiary_address" + beneficiary_address + "beneficiary_document_number" + beneficiary_document_number + "beneficiary_document_type" + beneficiary_document_type + "beneficiary_email" + beneficiary_email + "beneficiary_first_name" + beneficiary_first_name + "beneficiary_last_name" + beneficiary_last_name + "country" + country + "currency" + currency + "order" + order + "purpose" + purpose + "purpose_comentary" + purpose_comentary + "transactions_type" + transactions_type + "url_notify" + url_notify + "wallet" + wallet;
             }
             case endpoints_1.default.CREATE_SEND: {
-                var _c = hash, currency = _c.currency, amount = _c.amount, order = _c.order, wallet = _c.wallet, wallet_recipient = _c.wallet_recipient, transactions_type = _c.transactions_type;
+                var _d = hash, currency = _d.currency, amount = _d.amount, order = _d.order, wallet = _d.wallet, wallet_recipient = _d.wallet_recipient, transactions_type = _d.transactions_type;
                 return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet + "wallet_recipient" + wallet_recipient;
             }
             default: {

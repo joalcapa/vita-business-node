@@ -8,6 +8,33 @@ Business.config({
     env: 'qa',
 });
 
+const withdrawal = async () => {
+    try {
+        const response = await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').withdrawal({
+            url_notify: 'https://localhost:3000/api/notify',
+            beneficiary_document_type: 'RUT',
+            beneficiary_document_number: '11.111.111-1',
+            account_type_bank: 'CC',
+            account_bank: '123456789',
+            bank_code: '0001',
+            beneficiary_email: 'josecaceres.oreul@gmail.com',
+            beneficiary_address: 'Algun lugar en el mundo',
+            beneficiary_last_name: 'Caceres',
+            beneficiary_first_name: 'Jose',
+            purpose_comentary: 'Envio',
+            purpose: 'EPFAMT',
+            country: 'CL',
+            currency: 'clp',
+            order: '987654321',
+            amount: 15000,
+        });
+
+        console.log('response for withdrawal: ', response);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 const recharge = async () => {
     try {
         const redirect_url = await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').recharge({
@@ -23,33 +50,6 @@ const recharge = async () => {
         console.log(e);
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const banks = async () => {
    try {
@@ -89,7 +89,8 @@ const transactions = async () => {
     }
 };
 
-recharge();
+withdrawal();
+// recharge();
 // banks();
 // master();
 // prices();

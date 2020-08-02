@@ -4,6 +4,7 @@ import {Credentials, RequestCreateWallet, RequestRecharge} from '../interfaces';
 import {RequestRechargeBusiness} from '../interfaces/requestRecharge';
 import {RequestSendBusiness} from '../interfaces/requestSend';
 import {RequestPurchaseBusiness} from '../interfaces/requestPurchase';
+import {RequestWithdrawalBusiness} from "../interfaces/requestWithdrawal";
 import RequestBanks from '../interfaces/requestBanks';
 import RequestWallets from '../interfaces/requestWallets';
 
@@ -150,7 +151,28 @@ class Configuration {
                 return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}wallet${wallet}`;
             }
             case endpoints.CREATE_WITHDRAWAL: {
-                return '';
+                const {
+                    url_notify,
+                    beneficiary_document_type,
+                    beneficiary_document_number,
+                    account_type_bank,
+                    account_bank,
+                    bank_code,
+                    beneficiary_email,
+                    beneficiary_address,
+                    beneficiary_last_name,
+                    beneficiary_first_name,
+                    purpose_comentary,
+                    purpose,
+                    country,
+                    currency,
+                    order,
+                    amount,
+                    wallet,
+                    transactions_type,
+                } = <RequestWithdrawalBusiness> hash;
+
+                return `account_bank${account_bank}account_type_bank${account_type_bank}amount${amount}bank_code${bank_code}beneficiary_address${beneficiary_address}beneficiary_document_number${beneficiary_document_number}beneficiary_document_type${beneficiary_document_type}beneficiary_email${beneficiary_email}beneficiary_first_name${beneficiary_first_name}beneficiary_last_name${beneficiary_last_name}country${country}currency${currency}order${order}purpose${purpose}purpose_comentary${purpose_comentary}transactions_type${transactions_type}url_notify${url_notify}wallet${wallet}`;
             }
             case endpoints.CREATE_SEND: {
                 const {currency, amount, order, wallet, wallet_recipient, transactions_type} = <RequestSendBusiness> hash;
