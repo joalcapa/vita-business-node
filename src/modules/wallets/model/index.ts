@@ -162,25 +162,6 @@ class Wallet extends Base {
             }
         });
     }
-
-    /*
-    public withdrawal(request: RequestWithdrawal) {
-        return this.createTransaction(async (resolve: any, reject: any) => {
-            const response: any = await transactionsProvider.createRecharge({
-                wallet: this.uuid,
-                transactions_type: 'withdrawal',
-                ...request,
-            });
-
-            if (response.error) {
-                reject(response.error);
-            } else {
-                const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
-                this.balances = balances;
-                resolve(response);
-            }
-        });
-    }*/
 }
 
 export default Wallet;
