@@ -25,7 +25,7 @@ const withdrawal = async () => {
             purpose: 'EPFAMT',
             country: 'CL',
             currency: 'clp',
-            order: '987654321',
+            order: crypto.randomBytes(64).toString('hex'),
             amount: 15000,
         });
 

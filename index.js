@@ -68,7 +68,7 @@ var withdrawal = function () { return __awaiter(void 0, void 0, void 0, function
                         purpose: 'EPFAMT',
                         country: 'CL',
                         currency: 'clp',
-                        order: '987654321',
+                        order: crypto_1.default.randomBytes(64).toString('hex'),
                         amount: 15000,
                     })];
             case 1:
