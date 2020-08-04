@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import Business, {Wallet, Bank, Price} from './src';
+import Business, {Wallet, Bank} from './src';
 
 Business.config({
     X_Login: 'e65828b2cf13b7eb125e5b855bfbdee4e4b51d00',
@@ -25,7 +25,7 @@ const withdrawal = async () => {
             purpose: 'EPFAMT',
             country: 'CL',
             currency: 'clp',
-            order: crypto.randomBytes(64).toString('hex'),
+            order: crypto.randomBytes(16).toString('hex'),
             amount: 15000,
         });
 
@@ -40,7 +40,7 @@ const recharge = async () => {
         const redirect_url = await Business.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').recharge({
             currency: 'clp',
             order: crypto.randomBytes(64).toString('hex'),
-            amount: 7777,
+            amount: 2500000,
             url_complete: 'https://ur.com/complete',
             url_cancel: 'https://ur.com/cancel',
         });

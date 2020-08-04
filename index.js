@@ -68,7 +68,7 @@ var withdrawal = function () { return __awaiter(void 0, void 0, void 0, function
                         purpose: 'EPFAMT',
                         country: 'CL',
                         currency: 'clp',
-                        order: crypto_1.default.randomBytes(64).toString('hex'),
+                        order: crypto_1.default.randomBytes(16).toString('hex'),
                         amount: 15000,
                     })];
             case 1:
@@ -92,7 +92,7 @@ var recharge = function () { return __awaiter(void 0, void 0, void 0, function (
                 return [4 /*yield*/, src_1.default.wallets('6400990a-baae-4c5d-ac82-c282c1da6a7b').recharge({
                         currency: 'clp',
                         order: crypto_1.default.randomBytes(64).toString('hex'),
-                        amount: 7777,
+                        amount: 2500000,
                         url_complete: 'https://ur.com/complete',
                         url_cancel: 'https://ur.com/cancel',
                     })];
