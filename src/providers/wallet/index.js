@@ -11,9 +11,11 @@ var getWallet = function (uuid) {
         resource: uuid,
     });
 };
-var getWallets = function () {
+var getWallets = function (filters) {
+    if (filters === void 0) { filters = {}; }
     return middlewares_1.apiCall({
         endpoint: endpoints_1.default.GET_WALLETS,
+        params: filters,
     });
 };
 var createWallet = function (token) {

@@ -112,8 +112,9 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
-    Wallet.prototype.get = function () {
+    Wallet.prototype.get = function (filters) {
         var _this = this;
+        if (filters === void 0) { filters = {}; }
         return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var response, _a, _b, uuid, _c, token, created_at, is_master, balances, wallets;
             return __generator(this, function (_d) {
@@ -124,7 +125,7 @@ var Wallet = /** @class */ (function (_super) {
                     case 1:
                         _a = _d.sent();
                         return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, providers_1.walletProvider.getWallets()];
+                    case 2: return [4 /*yield*/, providers_1.walletProvider.getWallets(filters)];
                     case 3:
                         _a = _d.sent();
                         _d.label = 4;

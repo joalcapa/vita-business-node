@@ -8,9 +8,10 @@ const getWallet = (uuid: string) => {
     });
 };
 
-const getWallets = () => {
+const getWallets = (filters: object = {}) => {
     return apiCall({
         endpoint: endpoints.GET_WALLETS,
+        params: filters,
     });
 };
 

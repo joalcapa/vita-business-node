@@ -71,6 +71,18 @@ const master = async () => {
     }
 };
 
+const walletList = async () => {
+    try {
+        let wallets = await Business.wallets().get({
+            count: 4,
+            page: 1,
+        });
+        console.log('wallets: ', wallets);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 const prices = async () => {
     try {
         const prices: any = await Business.prices().get();
@@ -89,7 +101,8 @@ const transactions = async () => {
     }
 };
 
-withdrawal();
+walletList();
+// withdrawal();
 // recharge();
 // banks();
 // master();

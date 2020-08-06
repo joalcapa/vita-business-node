@@ -63,10 +63,8 @@ class Configuration {
 
         if (endpoint === endpoints.GET_WALLETS || endpoint === endpoints.GET_WALLET) {
             let url = Configuration.getWalletsUrl(resource);
-            if (params.hasOwnProperty('is_master')) {
-                const {is_master} = <RequestWallets> params;
-                url = `${url}?is_master=${is_master}`;
-            }
+            const request = <RequestWallets> params;
+            url = `${url}?${params.hasOwnProperty('page') ? `page=${request.page}&` : ''}${params.hasOwnProperty('count') ? `count=${request.count}&` : ''}${params.hasOwnProperty('is_master') ? `is_master=${request.is_master}` : ''}`;
 
             return {
                 url,

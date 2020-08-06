@@ -42,9 +42,9 @@ class Wallet extends Base {
         });
     }
 
-    public get() {
+    public get(filters: object = {}) {
         return this.promise(async (resolve: any, reject: any) => {
-            const response: any = this.uuid ? await walletProvider.getWallet(this.uuid) : await walletProvider.getWallets();
+            const response: any = this.uuid ? await walletProvider.getWallet(this.uuid) : await walletProvider.getWallets(filters);
             if (response.error) {
                 reject(response.error);
             } else {

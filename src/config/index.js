@@ -46,10 +46,8 @@ var Configuration = /** @class */ (function () {
         }
         if (endpoint === endpoints_1.default.GET_WALLETS || endpoint === endpoints_1.default.GET_WALLET) {
             var url = Configuration.getWalletsUrl(resource);
-            if (params.hasOwnProperty('is_master')) {
-                var is_master = params.is_master;
-                url = url + "?is_master=" + is_master;
-            }
+            var request = params;
+            url = url + "?" + (params.hasOwnProperty('page') ? "page=" + request.page + "&" : '') + (params.hasOwnProperty('count') ? "count=" + request.count + "&" : '') + (params.hasOwnProperty('is_master') ? "is_master=" + request.is_master : '');
             return {
                 url: url,
                 method: 'get',
