@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/joalcapa/vita-business-node#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "crypto": "^1.0.1",
     "typescript": "^3.9.3"
   },
