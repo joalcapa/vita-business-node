@@ -1,0 +1,1 @@
+export const REQUESTS_KEY_STORAGE = 'REQUESTS';

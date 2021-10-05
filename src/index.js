@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
 var config_1 = __importDefault(require("./config"));
 var modules_1 = require("./modules");
+var vita_1 = __importDefault(require("./providers/vita"));
 var model_1 = require("./modules/wallets/model");
 Object.defineProperty(exports, "Wallet", { enumerable: true, get: function () { return model_1.default; } });
 var model_2 = require("./modules/banks/model");
@@ -20,6 +21,7 @@ exports.config = function (credentials) {
         config_1.default.getInstance().setCredentials(credentials);
 };
 exports.default = {
+    vitaProvider: vita_1.default,
     config: exports.config,
     wallets: modules_1.wallets,
     banks: modules_1.banks,

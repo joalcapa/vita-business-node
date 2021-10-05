@@ -12,6 +12,7 @@ var Configuration = /** @class */ (function () {
             X_Trans_Key: '',
             secret: '',
             env: '',
+            isDevelopment: false,
         };
     }
     Configuration.getInstance = function () {
@@ -24,6 +25,10 @@ var Configuration = /** @class */ (function () {
         var _a = Configuration.getInstance().credentials, _b = _a.X_Login, X_Login = _b === void 0 ? null : _b, _c = _a.X_Trans_Key, X_Trans_Key = _c === void 0 ? null : _c, _d = _a.secret, secret = _d === void 0 ? null : _d, _e = _a.env, env = _e === void 0 ? null : _e;
         return (X_Login && X_Trans_Key && secret && env && (env === Configuration.QA || env === Configuration.PROD));
     };
+    Configuration.isDevelopment = function () {
+        var _a = Configuration.getInstance().credentials.isDevelopment, isDevelopment = _a === void 0 ? false : _a;
+        return isDevelopment;
+    };
     Configuration.prototype.setCredentials = function (credentials) {
         this.credentials = credentials;
     };
@@ -32,7 +37,8 @@ var Configuration = /** @class */ (function () {
         if (endpoint === endpoints_1.default.CREATE_RECHARGE ||
             endpoint === endpoints_1.default.CREATE_PURCHASE ||
             endpoint === endpoints_1.default.CREATE_WITHDRAWAL ||
-            endpoint === endpoints_1.default.CREATE_SEND) {
+            endpoint === endpoints_1.default.CREATE_SEND ||
+            endpoint === endpoints_1.default.CREATE_VITA_SEND) {
             return {
                 url: Configuration.getTransactionsUrl(),
                 method: 'post',
@@ -72,6 +78,13 @@ var Configuration = /** @class */ (function () {
                 method: 'get',
             };
         }
+        if (endpoint === endpoints_1.default.GET_VITA_EMAIL) {
+            var request = params;
+            return {
+                url: Configuration.getVitaUsersUrl() + "?email=" + request.email,
+                method: 'get',
+            };
+        }
         return {
             url: '',
             method: '',
@@ -95,6 +108,9 @@ var Configuration = /** @class */ (function () {
     };
     Configuration.getBanksUrl = function () {
         return Configuration.getUrl() + "/banks";
+    };
+    Configuration.getVitaUsersUrl = function () {
+        return Configuration.getUrl() + "/vita_users";
     };
     Configuration.prepareResult = function (hash, type) {
         switch (type) {
@@ -129,6 +145,10 @@ var Configuration = /** @class */ (function () {
             case endpoints_1.default.CREATE_SEND: {
                 var _d = hash, currency = _d.currency, amount = _d.amount, order = _d.order, wallet = _d.wallet, wallet_recipient = _d.wallet_recipient, transactions_type = _d.transactions_type;
                 return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet + "wallet_recipient" + wallet_recipient;
+            }
+            case endpoints_1.default.CREATE_VITA_SEND: {
+                var _e = hash, currency = _e.currency, amount = _e.amount, order = _e.order, wallet = _e.wallet, email = _e.email, transactions_type = _e.transactions_type;
+                return "amount" + amount + "currency" + currency + "email" + email + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet;
             }
             default: {
                 return '';

@@ -54,9 +54,9 @@ class Transaction extends Base {
         return null;
     }
 
-    public get() {
+    public get(filters: object = {}) {
         return this.promise(async (resolve: any, reject: any) => {
-            const response: any = this.id ? await transactionsProvider.getTransaction(this.id) : await transactionsProvider.getTransactions();
+            const response: any = this.id ? await transactionsProvider.getTransaction(this.id) : await transactionsProvider.getTransactions(filters);
 
             if (response.error) {
                 reject(response.error);
@@ -130,7 +130,11 @@ class Transaction extends Base {
                         );
                     });
 
-                    resolve(transactions);
+                    resolve({
+                        data: transactions,
+                        total: response.total,
+                        count: response.count,
+                    });
                 }
             }
         });

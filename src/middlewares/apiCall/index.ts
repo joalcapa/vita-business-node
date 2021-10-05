@@ -1,5 +1,8 @@
+// @ts-nocheck
 import axios from 'axios';
+
 import Configuration from '../../config';
+import {writeRequestsInStorage} from "../../utils";
 
 const apiCall = async (preConfig: any) => {
     const {data = {}, resource = '', endpoint = '', params = {}} = preConfig;
@@ -11,18 +14,24 @@ const apiCall = async (preConfig: any) => {
         }
     }
 
+    let result = null;
     const config = {
         ...preConfig,
         ...Configuration.getUri(endpoint, resource, params),
         ...Configuration.prepareHeaders(data, endpoint),
+        isSuccessful: true,
     };
 
     try {
         const response = await axios(config);
-        return response.data;
+        result = response.data;
     } catch (e) {
-        return e.response.data;
+        config.isSuccessful = false;
+        result = e.response.data;
     }
+
+    writeRequestsInStorage({...config, result});
+    return result;
 };
 
 export default apiCall;

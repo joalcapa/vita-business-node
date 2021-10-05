@@ -49,7 +49,11 @@ class Bank extends Base {
                     );
                 });
 
-                resolve(banks);
+                resolve({
+                    data: banks,
+                    total: response.total,
+                    count: response.count,
+                });
             }
         });
     }

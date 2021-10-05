@@ -3,11 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createVitaSend = void 0;
 var endpoints_1 = __importDefault(require("../../config/endpoints"));
 var middlewares_1 = require("../../middlewares");
-var getTransactions = function () {
+var getTransactions = function (filters) {
+    if (filters === void 0) { filters = {}; }
     return middlewares_1.apiCall({
         endpoint: endpoints_1.default.GET_TRANSACTIONS,
+        params: filters,
     });
 };
 var getTransaction = function (id) {
@@ -41,6 +44,12 @@ var createSend = function (data) {
         data: data,
     });
 };
+exports.createVitaSend = function (data) {
+    return middlewares_1.apiCall({
+        endpoint: endpoints_1.default.CREATE_VITA_SEND,
+        data: data,
+    });
+};
 exports.default = {
     getTransactions: getTransactions,
     getTransaction: getTransaction,
@@ -48,4 +57,5 @@ exports.default = {
     createPurchase: createPurchase,
     createWithdrawal: createWithdrawal,
     createSend: createSend,
+    createVitaSend: exports.createVitaSend,
 };

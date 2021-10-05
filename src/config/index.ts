@@ -1,10 +1,12 @@
 import crypto from 'crypto';
 import endpoints from './endpoints';
-import {Credentials, RequestCreateWallet, RequestRecharge} from '../interfaces';
+import {Credentials, RequestCreateWallet} from '../interfaces';
 import {RequestRechargeBusiness} from '../interfaces/requestRecharge';
 import {RequestSendBusiness} from '../interfaces/requestSend';
+import {RequestVitaSendBusiness} from '../interfaces/requestVitaSend';
 import {RequestPurchaseBusiness} from '../interfaces/requestPurchase';
-import {RequestWithdrawalBusiness} from "../interfaces/requestWithdrawal";
+import {RequestWithdrawalBusiness} from '../interfaces/requestWithdrawal';
+import RequestVitaUsers from '../interfaces/requestVitaUsers';
 import RequestBanks from '../interfaces/requestBanks';
 import RequestWallets from '../interfaces/requestWallets';
 
@@ -15,6 +17,7 @@ class Configuration {
         X_Trans_Key: '',
         secret: '',
         env: '',
+        isDevelopment: false,
     };
 
     static QA_URL: string = 'https://vita-wallet-api-qa-2.appspot.com/api/businesses';
@@ -37,6 +40,11 @@ class Configuration {
         return (X_Login && X_Trans_Key && secret && env && (env === Configuration.QA || env === Configuration.PROD));
     }
 
+    public static isDevelopment() {
+        const {isDevelopment = false} = Configuration.getInstance().credentials;
+        return isDevelopment;
+    }
+
     public setCredentials(credentials: Credentials) {
         this.credentials = credentials;
     }
@@ -46,7 +54,8 @@ class Configuration {
             endpoint === endpoints.CREATE_RECHARGE ||
             endpoint === endpoints.CREATE_PURCHASE ||
             endpoint === endpoints.CREATE_WITHDRAWAL ||
-            endpoint === endpoints.CREATE_SEND
+            endpoint === endpoints.CREATE_SEND ||
+            endpoint === endpoints.CREATE_VITA_SEND
         ) {
             return {
                 url: Configuration.getTransactionsUrl(),
@@ -94,6 +103,14 @@ class Configuration {
             }
         }
 
+        if (endpoint === endpoints.GET_VITA_EMAIL) {
+            const request = <RequestVitaUsers> params;
+            return {
+                url: `${Configuration.getVitaUsersUrl()}?email=${request.email}`,
+                method: 'get',
+            }
+        }
+
         return {
             url: '',
             method: '',
@@ -120,6 +137,10 @@ class Configuration {
 
     public static getBanksUrl() {
         return `${Configuration.getUrl()}/banks`;
+    }
+
+    public static getVitaUsersUrl() {
+        return `${Configuration.getUrl()}/vita_users`;
     }
 
     public static prepareResult(hash: object, type: string) {
@@ -175,6 +196,10 @@ class Configuration {
             case endpoints.CREATE_SEND: {
                 const {currency, amount, order, wallet, wallet_recipient, transactions_type} = <RequestSendBusiness> hash;
                 return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}wallet${wallet}wallet_recipient${wallet_recipient}`;
+            }
+            case endpoints.CREATE_VITA_SEND: {
+                const {currency, amount, order, wallet, email, transactions_type} = <RequestVitaSendBusiness> hash;
+                return `amount${amount}currency${currency}email${email}order${order}transactions_type${transactions_type}wallet${wallet}`;
             }
             default: {
                 return '';

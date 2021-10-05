@@ -2,12 +2,14 @@ import endpoints from '../../config/endpoints';
 import {apiCall} from '../../middlewares';
 import {RequestRechargeBusiness} from '../../interfaces/requestRecharge';
 import {RequestSendBusiness} from '../../interfaces/requestSend';
+import {RequestVitaSendBusiness} from '../../interfaces/requestVitaSend';
 import {RequestPurchaseBusiness} from '../../interfaces/requestPurchase';
 import {RequestWithdrawalBusiness} from '../../interfaces/requestWithdrawal';
 
-const getTransactions = () => {
+const getTransactions = (filters: object = {}) => {
     return apiCall({
         endpoint: endpoints.GET_TRANSACTIONS,
+        params: filters,
     });
 };
 
@@ -46,6 +48,13 @@ const createSend = (data: RequestSendBusiness) => {
     });
 };
 
+export const createVitaSend = (data: RequestVitaSendBusiness) => {
+    return apiCall({
+        endpoint: endpoints.CREATE_VITA_SEND,
+        data,
+    });
+};
+
 export default {
     getTransactions,
     getTransaction,
@@ -53,4 +62,5 @@ export default {
     createPurchase,
     createWithdrawal,
     createSend,
+    createVitaSend,
 };

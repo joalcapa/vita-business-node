@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import Base from './base';
 import {walletProvider, transactionsProvider} from '../../../providers';
-import {RequestRecharge, RequestPurchase, RequestWithdrawal, RequestSend} from '../../../interfaces';
+import {RequestRecharge, RequestPurchase, RequestWithdrawal, RequestSend, RequestVitaSend} from '../../../interfaces';
 
 class Wallet extends Base {
     private created_at: string = '';
@@ -61,7 +61,12 @@ class Wallet extends Base {
                         const {uuid, attributes: {token, created_at, is_master, balances}} = wallet;
                         return new Wallet(uuid, created_at, is_master, balances, token);
                     });
-                    resolve(wallets);
+
+                    resolve({
+                        data: wallets,
+                        total: response.total,
+                        count: response.count,
+                    });
                 }
             }
         });
@@ -114,6 +119,24 @@ class Wallet extends Base {
             const response: any = await transactionsProvider.createSend({
                 wallet: this.uuid,
                 transactions_type: 'sent',
+                ...request,
+            });
+
+            if (response.error) {
+                reject(response.error);
+            } else {
+                const {transaction: {attributes: {sender_wallet: {balances}}}} = response;
+                this.balances = balances;
+                resolve(response.transaction);
+            }
+        });
+    }
+
+    public vitaSend(request: RequestVitaSend) {
+        return this.createTransaction(async (resolve: any, reject: any) => {
+            const response: any = await transactionsProvider.createVitaSend({
+                wallet: this.uuid,
+                transactions_type: 'vita_sent',
                 ...request,
             });
 

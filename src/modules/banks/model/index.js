@@ -92,7 +92,11 @@ var Bank = /** @class */ (function (_super) {
                                 var _a = bank.attributes, length_of_checking_account_number = _a.length_of_checking_account_number, length_of_savings_account_number = _a.length_of_savings_account_number, name = _a.name, bank_code = _a.bank_code;
                                 return new Bank(_this.iso_code, length_of_checking_account_number, length_of_savings_account_number, name, bank_code);
                             });
-                            resolve(banks);
+                            resolve({
+                                data: banks,
+                                total: response.total,
+                                count: response.count,
+                            });
                         }
                         return [2 /*return*/];
                 }
