@@ -13,9 +13,14 @@ export const config = (credentials: Credentials) => {
         Configuration.getInstance().setCredentials(credentials);
 };
 
+export const isCredentials = () => {
+    Configuration.isCredentials();
+};
+
 export default {
     vitaProvider,
     config,
+    isCredentials,
     wallets,
     banks,
     prices,

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = void 0;
+exports.isCredentials = exports.config = void 0;
 var config_1 = __importDefault(require("./config"));
 var modules_1 = require("./modules");
 var vita_1 = __importDefault(require("./providers/vita"));
@@ -20,9 +20,13 @@ exports.config = function (credentials) {
     if (X_Login && X_Trans_Key && secret && env && (env === config_1.default.QA || env === config_1.default.PROD))
         config_1.default.getInstance().setCredentials(credentials);
 };
+exports.isCredentials = function () {
+    config_1.default.isCredentials();
+};
 exports.default = {
     vitaProvider: vita_1.default,
     config: exports.config,
+    isCredentials: exports.isCredentials,
     wallets: modules_1.wallets,
     banks: modules_1.banks,
     prices: modules_1.prices,
