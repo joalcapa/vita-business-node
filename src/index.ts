@@ -14,13 +14,18 @@ export const config = (credentials: Credentials) => {
 };
 
 export const isCredentials = () => {
-    Configuration.isCredentials();
+    return Configuration.isCredentials();
+};
+
+export const isDevelopment = () => {
+    return Configuration.isDevelopment();
 };
 
 export default {
     vitaProvider,
     config,
     isCredentials,
+    isDevelopment,
     wallets,
     banks,
     prices,

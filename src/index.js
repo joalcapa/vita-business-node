@@ -21,12 +21,16 @@ exports.config = function (credentials) {
         config_1.default.getInstance().setCredentials(credentials);
 };
 exports.isCredentials = function () {
-    config_1.default.isCredentials();
+    return config_1.default.isCredentials();
+};
+exports.isDevelopment = function () {
+    return config_1.default.isDevelopment();
 };
 exports.default = {
     vitaProvider: vita_1.default,
     config: exports.config,
     isCredentials: exports.isCredentials,
+    isDevelopment: exports.isDevelopment,
     wallets: modules_1.wallets,
     banks: modules_1.banks,
     prices: modules_1.prices,
