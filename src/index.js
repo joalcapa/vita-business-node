@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isCredentials = exports.config = void 0;
+exports.isDevelopment = exports.isCredentials = exports.config = void 0;
 var config_1 = __importDefault(require("./config"));
 var modules_1 = require("./modules");
 var vita_1 = __importDefault(require("./providers/vita"));
