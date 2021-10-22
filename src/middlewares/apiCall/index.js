@@ -1,4 +1,6 @@
 "use strict";
+import Configuration from "../../config";
+
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -83,7 +85,9 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
                 result = e_1.response.data;
                 return [3 /*break*/, 4];
             case 4:
-                utils_1.writeRequestsInStorage(__assign(__assign({}, config), { result: result }));
+                if (config_1.default.isDevelopment()) {
+                    utils_1.writeRequestsInStorage(__assign(__assign({}, config), { result: result }));
+                }
                 return [2 /*return*/, result];
         }
     });

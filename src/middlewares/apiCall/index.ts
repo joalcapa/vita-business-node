@@ -30,7 +30,9 @@ const apiCall = async (preConfig: any) => {
         result = e.response.data;
     }
 
-    writeRequestsInStorage({...config, result});
+    if (Configuration.isDevelopment()) {
+        writeRequestsInStorage({...config, result});
+    }
     return result;
 };
 
