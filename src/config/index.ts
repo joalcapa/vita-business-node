@@ -9,6 +9,7 @@ import {RequestWithdrawalBusiness} from '../interfaces/requestWithdrawal';
 import RequestVitaUsers from '../interfaces/requestVitaUsers';
 import RequestBanks from '../interfaces/requestBanks';
 import RequestWallets from '../interfaces/requestWallets';
+import RequestPrices from '../interfaces/RequestPrices';
 
 class Configuration {
     private static instance: Configuration;
@@ -97,8 +98,9 @@ class Configuration {
         }
 
         if (endpoint === endpoints.GET_PRICES) {
+            const request = <RequestPrices> params;
             return {
-                url: Configuration.getPricesUrl(),
+                url: `${Configuration.getPricesUrl()}${request.uuid ? `?wallet_uuid=${request.uuid}` : ''}`,
                 method: 'get',
             }
         }

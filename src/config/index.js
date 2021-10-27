@@ -73,8 +73,9 @@ var Configuration = /** @class */ (function () {
             };
         }
         if (endpoint === endpoints_1.default.GET_PRICES) {
+            var request = params;
             return {
-                url: Configuration.getPricesUrl(),
+                url: "" + Configuration.getPricesUrl() + (request.uuid ? "?wallet_uuid=" + request.uuid : ''),
                 method: 'get',
             };
         }

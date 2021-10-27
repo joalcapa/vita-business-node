@@ -210,6 +210,23 @@ var Wallet = /** @class */ (function (_super) {
             });
         }); });
     };
+    Wallet.prototype.updatePrices = function () {
+        var _this = this;
+        return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, providers_1.pricesProvider.getPrices(this.uuid)];
+                    case 1:
+                        response = _a.sent();
+                        response.error ?
+                            reject(response.error) :
+                            resolve(response);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Wallet.prototype.recharge = function (request) {
         var _this = this;
         return this.createTransaction(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {

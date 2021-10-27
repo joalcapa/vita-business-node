@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import Base from './base';
-import {walletProvider, transactionsProvider} from '../../../providers';
+import {walletProvider, transactionsProvider, pricesProvider} from '../../../providers';
 import {RequestRecharge, RequestPurchase, RequestWithdrawal, RequestSend, RequestVitaSend} from '../../../interfaces';
 
 class Wallet extends Base {
@@ -97,6 +97,15 @@ class Wallet extends Base {
             response.error ?
                 reject(response.error) :
                 resolve(response.transactions);
+        });
+    }
+
+    public updatePrices() {
+        return this.promise(async (resolve: any, reject: any) => {
+            const response: any = await pricesProvider.getPrices(this.uuid);
+            response.error ?
+                reject(response.error) :
+                resolve(response);
         });
     }
 
