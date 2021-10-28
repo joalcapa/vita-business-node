@@ -14,6 +14,7 @@ class Transaction extends Base {
     private created_at: string = '';
     private recipient_wallet: any = null;
     private sender_wallet: any = null;
+    private recipient_email: string = '';
 
     public constructor(
         id: any = null,
@@ -27,7 +28,8 @@ class Transaction extends Base {
         total_fee: number = 0,
         created_at: string = '',
         recipient_wallet: any = null,
-        sender_wallet: any = null
+        sender_wallet: any = null,
+        recipient_email: string = '',
     ) {
         super();
 
@@ -43,6 +45,7 @@ class Transaction extends Base {
         this.created_at = created_at;
         this.recipient_wallet = recipient_wallet;
         this.sender_wallet = sender_wallet;
+        this.recipient_email = recipient_email;
     }
 
     private createWallet(wallet: any = null) {
@@ -77,6 +80,7 @@ class Transaction extends Base {
                                 created_at,
                                 recipient_wallet,
                                 sender_wallet,
+                                recipient_email,
                             },
                         },
                     } = response;
@@ -93,6 +97,7 @@ class Transaction extends Base {
                     this.created_at = created_at;
                     this.recipient_wallet = this.createWallet(recipient_wallet);
                     this.sender_wallet = this.createWallet(sender_wallet);
+                    this.recipient_email = recipient_email;
 
                     resolve(this);
                 } else {
@@ -111,6 +116,7 @@ class Transaction extends Base {
                                 created_at,
                                 recipient_wallet,
                                 sender_wallet,
+                                recipient_email,
                             },
                         } = transaction;
 
@@ -126,7 +132,8 @@ class Transaction extends Base {
                             total_fee,
                             created_at,
                             this.createWallet(recipient_wallet),
-                            this.createWallet(sender_wallet)
+                            this.createWallet(sender_wallet),
+                            recipient_email,
                         );
                     });
 
