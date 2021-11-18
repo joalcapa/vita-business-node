@@ -191,9 +191,11 @@ class Configuration {
                     amount,
                     wallet,
                     transactions_type,
+                    city,
+                    phone,
                 } = <RequestWithdrawalBusiness> hash;
 
-                return `account_bank${account_bank}account_type_bank${account_type_bank}amount${amount}bank_code${bank_code}beneficiary_address${beneficiary_address}beneficiary_document_number${beneficiary_document_number}beneficiary_document_type${beneficiary_document_type}beneficiary_email${beneficiary_email}beneficiary_first_name${beneficiary_first_name}beneficiary_last_name${beneficiary_last_name}country${country}currency${currency}order${order}purpose${purpose}purpose_comentary${purpose_comentary}transactions_type${transactions_type}url_notify${url_notify}wallet${wallet}`;
+                return `account_bank${account_bank}account_type_bank${account_type_bank}amount${amount}bank_code${bank_code}beneficiary_address${beneficiary_address}beneficiary_document_number${beneficiary_document_number}beneficiary_document_type${beneficiary_document_type}beneficiary_email${beneficiary_email}beneficiary_first_name${beneficiary_first_name}beneficiary_last_name${beneficiary_last_name}${city ? `city${city}` : ''}country${country}currency${currency}order${order}${phone ? `phone${phone}` : ''}purpose${purpose}purpose_comentary${purpose_comentary}transactions_type${transactions_type}url_notify${url_notify}wallet${wallet}`;
             }
             case endpoints.CREATE_SEND: {
                 const {currency, amount, order, wallet, wallet_recipient, transactions_type} = <RequestSendBusiness> hash;

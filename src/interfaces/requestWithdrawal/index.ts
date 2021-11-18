@@ -15,6 +15,8 @@ export interface RequestWithdrawal {
     currency: string;
     order: string;
     amount: number;
+    city?: string;
+    phone?: string;
 }
 
 export interface RequestWithdrawalBusiness {
@@ -34,6 +36,8 @@ export interface RequestWithdrawalBusiness {
     currency: string;
     order: string;
     amount: number;
+    city?: string;
+    phone?: string;
     wallet: string;
     transactions_type: string;
 }
