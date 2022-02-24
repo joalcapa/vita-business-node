@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var Base = /** @class */ (function () {
     function Base() {
         this.uuid = '';
@@ -22,11 +22,11 @@ var Base = /** @class */ (function () {
             else {
                 reject({
                     error: 700,
-                    message: 'UUID wallet not found',
+                    message: 'UUID wallet not found'
                 });
             }
         });
     };
     return Base;
 }());
-exports.default = Base;
+exports["default"] = Base;

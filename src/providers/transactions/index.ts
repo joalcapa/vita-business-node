@@ -55,6 +55,12 @@ export const createVitaSend = (data: RequestVitaSendBusiness) => {
     });
 };
 
+export const getWithdrawalRules = () => {
+    return apiCall({
+        endpoint: endpoints.GET_WITHDRAWAL_RULES,
+    });
+};
+
 export default {
     getTransactions,
     getTransaction,
@@ -63,4 +69,5 @@ export default {
     createWithdrawal,
     createSend,
     createVitaSend,
+    getWithdrawalRules,
 };
