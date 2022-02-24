@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var Base = /** @class */ (function () {
     function Base() {
         this.id = '';
@@ -14,4 +14,4 @@ var Base = /** @class */ (function () {
     };
     return Base;
 }());
-exports.default = Base;
+exports["default"] = Base;

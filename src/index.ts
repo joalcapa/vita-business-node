@@ -2,6 +2,7 @@ import Configuration from './config';
 import {Credentials} from './interfaces';
 import {wallets, banks, prices, transactions} from './modules';
 import vitaProvider from './providers/vita';
+import {getWithdrawalRules} from './providers/transactions';
 export {default as Wallet} from './modules/wallets/model';
 export {default as Bank} from './modules/banks/model';
 export {default as Price} from './modules/prices/model';
@@ -23,6 +24,9 @@ export const isDevelopment = () => {
 
 export default {
     vitaProvider,
+    rulesProvider: {
+        getWithdrawalRules,
+    },
     config,
     isCredentials,
     isDevelopment,

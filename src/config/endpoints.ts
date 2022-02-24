@@ -16,6 +16,8 @@ const GET_PRICES: string = 'PRICES/GET_PRICES';
 
 const GET_VITA_EMAIL: string = 'VITA_USERS/GET_VITA_EMAIL';
 
+const GET_WITHDRAWAL_RULES: string = 'TRANSACTIONS/GET_WITHDRAWAL_RULES';
+
 export default {
     CREATE_WALLET,
     GET_WALLET,
@@ -30,4 +32,5 @@ export default {
     GET_BANKS,
     GET_PRICES,
     GET_VITA_EMAIL,
+    GET_WITHDRAWAL_RULES,
 };

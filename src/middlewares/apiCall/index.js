@@ -46,33 +46,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 // @ts-nocheck
-var axios_1 = __importDefault(require("axios"));
-var config_1 = __importDefault(require("../../config"));
+var axios_1 = require("axios");
+var config_1 = require("../../config");
 var utils_1 = require("../../utils");
 var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, data, _b, resource, _c, endpoint, _d, params, result, config, response, e_1;
     return __generator(this, function (_e) {
         switch (_e.label) {
             case 0:
-                // eslint-disable-next-line no-unused-expressions
                 _a = preConfig.data, data = _a === void 0 ? {} : _a, _b = preConfig.resource, resource = _b === void 0 ? '' : _b, _c = preConfig.endpoint, endpoint = _c === void 0 ? '' : _c, _d = preConfig.params, params = _d === void 0 ? {} : _d;
-                if (!config_1.default.isCredentials()) {
+                if (!config_1["default"].isCredentials()) {
                     return [2 /*return*/, {
                             error: 1,
-                            message: 'Invalid credentials',
+                            message: 'Invalid credentials'
                         }];
                 }
                 result = null;
-                config = __assign(__assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint, resource, params)), config_1.default.prepareHeaders(data, endpoint)), { isSuccessful: true });
+                config = __assign(__assign(__assign(__assign({}, preConfig), config_1["default"].getUri(endpoint, resource, params)), config_1["default"].prepareHeaders(data, endpoint)), { isSuccessful: true });
                 _e.label = 1;
             case 1:
                 _e.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, axios_1.default(config)];
+                return [4 /*yield*/, axios_1["default"](config)];
             case 2:
                 response = _e.sent();
                 result = response.data;
@@ -83,11 +79,11 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
                 result = e_1.response.data;
                 return [3 /*break*/, 4];
             case 4:
-                if (config_1.default.isDevelopment()) {
+                if (config_1["default"].isDevelopment()) {
                     utils_1.writeRequestsInStorage(__assign(__assign({}, config), { result: result }));
                 }
                 return [2 /*return*/, result];
         }
     });
 }); };
-exports.default = apiCall;
+exports["default"] = apiCall;

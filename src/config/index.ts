@@ -113,6 +113,13 @@ class Configuration {
             }
         }
 
+        if (endpoint === endpoints.GET_WITHDRAWAL_RULES) {
+            return {
+                url: Configuration.getWithdrawalRulesUrl(),
+                method: 'get',
+            }
+        }
+
         return {
             url: '',
             method: '',
@@ -143,6 +150,10 @@ class Configuration {
 
     public static getVitaUsersUrl() {
         return `${Configuration.getUrl()}/vita_users`;
+    }
+
+    public static getWithdrawalRulesUrl() {
+        return `${Configuration.getUrl()}/withdrawal_rules`;
     }
 
     public static prepareResult(hash: object, type: string) {
