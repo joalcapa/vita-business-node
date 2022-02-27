@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import {createHmac} from 'crypto';
 import endpoints from './endpoints';
 import {Credentials, RequestCreateWallet} from '../interfaces';
 import {RequestRechargeBusiness} from '../interfaces/requestRecharge';
@@ -21,10 +21,14 @@ class Configuration {
         isDevelopment: false,
     };
 
-    static QA_URL: string = 'https://vita-wallet-api-qa-2.appspot.com/api/businesses';
+    static LOCAL_URL: string = 'http://127.0.0.1:3000/api/businesses';
+    static QA_URL: string = 'https://api.qa.vitawallet.io/api/businesses';
     static PROD_URL: string = 'https://api.vitawallet.io/api/businesses';
+    static STAGE_URL: string = 'https://api.stage.vitawallet.io/api/businesses';
+    static LOCAL: string = 'local';
     static QA: string = 'qa';
     static PROD: string = 'prod';
+    static STAGE: string = 'stage';
 
     private constructor() { }
 
@@ -38,7 +42,12 @@ class Configuration {
 
     public static isCredentials() {
         const {X_Login = null, X_Trans_Key = null, secret = null, env = null} = Configuration.getInstance().credentials;
-        return (X_Login && X_Trans_Key && secret && env && (env === Configuration.QA || env === Configuration.PROD));
+        return (X_Login && X_Trans_Key && secret && env && (
+            env === Configuration.LOCAL ||
+            env === Configuration.QA ||
+            env === Configuration.STAGE ||
+            env === Configuration.PROD
+        ));
     }
 
     public static isDevelopment() {
@@ -127,9 +136,20 @@ class Configuration {
     }
 
     public static getUrl() {
-        return Configuration.instance.credentials.env === Configuration.PROD ?
-            Configuration.PROD_URL :
-            Configuration.QA_URL;
+        switch (Configuration.instance.credentials.env) {
+            case Configuration.PROD: {
+                return Configuration.PROD_URL;
+            }
+            case Configuration.STAGE: {
+                return Configuration.STAGE_URL;
+            }
+            case Configuration.QA: {
+                return Configuration.QA_URL;
+            }
+            default: {
+                return Configuration.LOCAL_URL;
+            }
+        }
     }
 
     public static getWalletsUrl(resource = '') {
@@ -227,7 +247,7 @@ class Configuration {
         const X_Date = new Date().toISOString();
         const result = Configuration.prepareResult(hash, type);
 
-        let hmac = crypto.createHmac('sha256', secret);
+        let hmac = createHmac('sha256', secret);
         hmac.setEncoding('hex');
         hmac.write(`${X_Login}${X_Date}${result}`);
         hmac.end();

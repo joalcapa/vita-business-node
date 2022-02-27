@@ -1,7 +1,10 @@
 "use strict";
-exports.__esModule = true;
-var model_1 = require("./model");
-var prices = function () {
-    return new model_1["default"]();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports["default"] = prices;
+Object.defineProperty(exports, "__esModule", { value: true });
+var model_1 = __importDefault(require("./model"));
+var prices = function () {
+    return new model_1.default();
+};
+exports.default = prices;

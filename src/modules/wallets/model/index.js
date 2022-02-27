@@ -59,9 +59,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var crypto_1 = require("crypto");
-var base_1 = require("./base");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var crypto_1 = __importDefault(require("crypto"));
+var base_1 = __importDefault(require("./base"));
 var providers_1 = require("../../../providers");
 var Wallet = /** @class */ (function (_super) {
     __extends(Wallet, _super);
@@ -76,7 +79,7 @@ var Wallet = /** @class */ (function (_super) {
         _this.is_master = false;
         _this.token = '';
         _this.balances = {
-            clp: 0
+            clp: 0,
         };
         _this.uuid = uuid;
         _this.created_at = created_at;
@@ -150,7 +153,7 @@ var Wallet = /** @class */ (function (_super) {
                                 resolve({
                                     data: wallets,
                                     total: response.total,
-                                    count: response.count
+                                    count: response.count,
                                 });
                             }
                         }
@@ -168,7 +171,7 @@ var Wallet = /** @class */ (function (_super) {
                 switch (_c.label) {
                     case 0:
                         if (!token)
-                            token = crypto_1["default"].randomBytes(64).toString('hex');
+                            token = crypto_1.default.randomBytes(64).toString('hex');
                         return [4 /*yield*/, providers_1.walletProvider.createWallet(token)];
                     case 1:
                         response = _c.sent();
@@ -330,5 +333,5 @@ var Wallet = /** @class */ (function (_super) {
         }); });
     };
     return Wallet;
-}(base_1["default"]));
-exports["default"] = Wallet;
+}(base_1.default));
+exports.default = Wallet;

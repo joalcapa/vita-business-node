@@ -1,35 +1,38 @@
 "use strict";
-exports.__esModule = true;
-var endpoints_1 = require("../../config/endpoints");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var endpoints_1 = __importDefault(require("../../config/endpoints"));
 var middlewares_1 = require("../../middlewares");
 var getWallet = function (uuid) {
     return middlewares_1.apiCall({
-        endpoint: endpoints_1["default"].GET_WALLET,
-        resource: uuid
+        endpoint: endpoints_1.default.GET_WALLET,
+        resource: uuid,
     });
 };
 var getWallets = function (filters) {
     if (filters === void 0) { filters = {}; }
     return middlewares_1.apiCall({
-        endpoint: endpoints_1["default"].GET_WALLETS,
-        params: filters
+        endpoint: endpoints_1.default.GET_WALLETS,
+        params: filters,
     });
 };
 var createWallet = function (token) {
     return middlewares_1.apiCall({
-        endpoint: endpoints_1["default"].CREATE_WALLET,
-        data: { token: token }
+        endpoint: endpoints_1.default.CREATE_WALLET,
+        data: { token: token },
     });
 };
 var getWalletMaster = function () {
     return middlewares_1.apiCall({
-        endpoint: endpoints_1["default"].GET_WALLETS,
+        endpoint: endpoints_1.default.GET_WALLETS,
         params: {
-            is_master: true
-        }
+            is_master: true,
+        },
     });
 };
-exports["default"] = {
+exports.default = {
     getWallet: getWallet,
     getWallets: getWallets,
     createWallet: createWallet,

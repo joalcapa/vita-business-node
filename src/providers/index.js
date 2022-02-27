@@ -1,19 +1,12 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var wallet_1 = require("./wallet");
-__createBinding(exports, wallet_1, "default", "walletProvider");
+Object.defineProperty(exports, "walletProvider", { enumerable: true, get: function () { return wallet_1.default; } });
 var transactions_1 = require("./transactions");
-__createBinding(exports, transactions_1, "default", "transactionsProvider");
+Object.defineProperty(exports, "transactionsProvider", { enumerable: true, get: function () { return transactions_1.default; } });
 var banks_1 = require("./banks");
-__createBinding(exports, banks_1, "default", "bankProvider");
+Object.defineProperty(exports, "bankProvider", { enumerable: true, get: function () { return banks_1.default; } });
 var prices_1 = require("./prices");
-__createBinding(exports, prices_1, "default", "pricesProvider");
+Object.defineProperty(exports, "pricesProvider", { enumerable: true, get: function () { return prices_1.default; } });
 var vita_1 = require("./vita");
-__createBinding(exports, vita_1, "default", "vitaProvider");
+Object.defineProperty(exports, "vitaProvider", { enumerable: true, get: function () { return vita_1.default; } });

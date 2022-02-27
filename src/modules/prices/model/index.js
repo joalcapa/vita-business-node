@@ -48,8 +48,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var base_1 = require("./base");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var base_1 = __importDefault(require("./base"));
 var providers_1 = require("../../../providers");
 var Price = /** @class */ (function (_super) {
     __extends(Price, _super);
@@ -77,5 +80,5 @@ var Price = /** @class */ (function (_super) {
         }); });
     };
     return Price;
-}(base_1["default"]));
-exports["default"] = Price;
+}(base_1.default));
+exports.default = Price;

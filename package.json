@@ -1,12 +1,12 @@
 {
   "name": "vita-business-node",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "SDK Vita Business",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
     "tsc": "tsc",
-    "recarga": "npm run tsc && node index.js"
+    "recarga": "npm run tsc && node proccess_task.js"
   },
   "repository": {
     "type": "git",

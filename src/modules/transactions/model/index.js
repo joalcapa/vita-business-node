@@ -48,9 +48,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var base_1 = require("./base");
-var model_1 = require("../../wallets/model");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var base_1 = __importDefault(require("./base"));
+var model_1 = __importDefault(require("../../wallets/model"));
 var providers_1 = require("../../../providers");
 var Transaction = /** @class */ (function (_super) {
     __extends(Transaction, _super);
@@ -100,7 +103,7 @@ var Transaction = /** @class */ (function (_super) {
         if (wallet === void 0) { wallet = null; }
         if (wallet) {
             var uuid = wallet.uuid, token = wallet.token, created_at = wallet.created_at, is_master = wallet.is_master, balances = wallet.balances;
-            return new model_1["default"](uuid, created_at, is_master, balances, token);
+            return new model_1.default(uuid, created_at, is_master, balances, token);
         }
         return null;
     };
@@ -154,7 +157,7 @@ var Transaction = /** @class */ (function (_super) {
                                 resolve({
                                     data: transactions,
                                     total: response.total,
-                                    count: response.count
+                                    count: response.count,
                                 });
                             }
                         }
@@ -164,5 +167,5 @@ var Transaction = /** @class */ (function (_super) {
         }); });
     };
     return Transaction;
-}(base_1["default"]));
-exports["default"] = Transaction;
+}(base_1.default));
+exports.default = Transaction;
