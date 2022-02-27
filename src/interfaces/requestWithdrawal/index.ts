@@ -17,6 +17,12 @@ export interface RequestWithdrawal {
     amount: number;
     city?: string;
     phone?: string;
+    beneficiary_type?: string;
+    company_name?: string;
+    bank_branch?: string;
+    swift_bic?: string;
+    zipcode?: string;
+    routing_number?: string;
 }
 
 export interface RequestWithdrawalBusiness {
@@ -38,6 +44,12 @@ export interface RequestWithdrawalBusiness {
     amount: number;
     city?: string;
     phone?: string;
+    beneficiary_type?: string;
+    company_name?: string;
+    bank_branch?: string;
+    swift_bic?: string;
+    zipcode?: string;
+    routing_number?: string;
     wallet: string;
     transactions_type: string;
 }

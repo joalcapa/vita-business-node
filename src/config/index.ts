@@ -176,76 +176,24 @@ class Configuration {
         return `${Configuration.getUrl()}/withdrawal_rules`;
     }
 
-    public static prepareResult(hash: object, type: string) {
-        switch(type) {
-            case endpoints.CREATE_WALLET: {
-                const {token} = <RequestCreateWallet> hash;
-                return `token${token}`;
-            }
-            case endpoints.GET_WALLETS: {
-                return '';
-            }
-            case endpoints.GET_WALLET: {
-                return '';
-            }
-            case endpoints.GET_TRANSACTIONS: {
-                return '';
-            }
-            case endpoints.GET_TRANSACTION: {
-                return '';
-            }
-            case endpoints.CREATE_RECHARGE: {
-                const {currency, amount, url_cancel, order, url_complete, wallet, transactions_type} = <RequestRechargeBusiness> hash;
-                return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}url_cancel${url_cancel}url_complete${url_complete}wallet${wallet}`;
-            }
-            case endpoints.CREATE_PURCHASE: {
-                const {currency, amount, order, wallet, transactions_type} = <RequestPurchaseBusiness> hash;
-                return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}wallet${wallet}`;
-            }
-            case endpoints.CREATE_WITHDRAWAL: {
-                const {
-                    url_notify,
-                    beneficiary_document_type,
-                    beneficiary_document_number,
-                    account_type_bank,
-                    account_bank,
-                    bank_code,
-                    beneficiary_email,
-                    beneficiary_address,
-                    beneficiary_last_name,
-                    beneficiary_first_name,
-                    purpose_comentary,
-                    purpose,
-                    country,
-                    currency,
-                    order,
-                    amount,
-                    wallet,
-                    transactions_type,
-                    city,
-                    phone,
-                } = <RequestWithdrawalBusiness> hash;
-
-                return `account_bank${account_bank}account_type_bank${account_type_bank}amount${amount}bank_code${bank_code}beneficiary_address${beneficiary_address}beneficiary_document_number${beneficiary_document_number}beneficiary_document_type${beneficiary_document_type}beneficiary_email${beneficiary_email}beneficiary_first_name${beneficiary_first_name}beneficiary_last_name${beneficiary_last_name}${city ? `city${city}` : ''}country${country}currency${currency}order${order}${phone ? `phone${phone}` : ''}purpose${purpose}purpose_comentary${purpose_comentary}transactions_type${transactions_type}url_notify${url_notify}wallet${wallet}`;
-            }
-            case endpoints.CREATE_SEND: {
-                const {currency, amount, order, wallet, wallet_recipient, transactions_type} = <RequestSendBusiness> hash;
-                return `amount${amount}currency${currency}order${order}transactions_type${transactions_type}wallet${wallet}wallet_recipient${wallet_recipient}`;
-            }
-            case endpoints.CREATE_VITA_SEND: {
-                const {currency, amount, order, wallet, email, transactions_type} = <RequestVitaSendBusiness> hash;
-                return `amount${amount}currency${currency}email${email}order${order}transactions_type${transactions_type}wallet${wallet}`;
-            }
-            default: {
-                return '';
-            }
+    public static prepareResult(hash: { [key: string]: any } = {}) {
+        if (Object.keys(hash).length > 0) {
+            return Object
+                .keys(hash)
+                .sort()
+                .filter((key) => (hash[key]))
+                .reduce((previousResult, key) =>
+                    `${previousResult}${key}${hash[key]}`
+                );
         }
+
+        return '';
     }
 
-    public static prepareHeaders(hash: object, type: string) {
+    public static prepareHeaders(hash: object) {
         const {X_Login, X_Trans_Key, secret} = Configuration.instance.credentials;
         const X_Date = new Date().toISOString();
-        const result = Configuration.prepareResult(hash, type);
+        const result = Configuration.prepareResult(hash);
 
         let hmac = createHmac('sha256', secret);
         hmac.setEncoding('hex');

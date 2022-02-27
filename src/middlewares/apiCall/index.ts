@@ -18,7 +18,7 @@ const apiCall = async (preConfig: any) => {
     const config = {
         ...preConfig,
         ...Configuration.getUri(endpoint, resource, params),
-        ...Configuration.prepareHeaders(data, endpoint),
+        ...Configuration.prepareHeaders(data),
         isSuccessful: true,
     };
 

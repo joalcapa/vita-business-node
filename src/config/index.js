@@ -136,53 +136,23 @@ var Configuration = /** @class */ (function () {
     Configuration.getWithdrawalRulesUrl = function () {
         return Configuration.getUrl() + "/withdrawal_rules";
     };
-    Configuration.prepareResult = function (hash, type) {
-        switch (type) {
-            case endpoints_1.default.CREATE_WALLET: {
-                var token = hash.token;
-                return "token" + token;
-            }
-            case endpoints_1.default.GET_WALLETS: {
-                return '';
-            }
-            case endpoints_1.default.GET_WALLET: {
-                return '';
-            }
-            case endpoints_1.default.GET_TRANSACTIONS: {
-                return '';
-            }
-            case endpoints_1.default.GET_TRANSACTION: {
-                return '';
-            }
-            case endpoints_1.default.CREATE_RECHARGE: {
-                var _a = hash, currency = _a.currency, amount = _a.amount, url_cancel = _a.url_cancel, order = _a.order, url_complete = _a.url_complete, wallet = _a.wallet, transactions_type = _a.transactions_type;
-                return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "url_cancel" + url_cancel + "url_complete" + url_complete + "wallet" + wallet;
-            }
-            case endpoints_1.default.CREATE_PURCHASE: {
-                var _b = hash, currency = _b.currency, amount = _b.amount, order = _b.order, wallet = _b.wallet, transactions_type = _b.transactions_type;
-                return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet;
-            }
-            case endpoints_1.default.CREATE_WITHDRAWAL: {
-                var _c = hash, url_notify = _c.url_notify, beneficiary_document_type = _c.beneficiary_document_type, beneficiary_document_number = _c.beneficiary_document_number, account_type_bank = _c.account_type_bank, account_bank = _c.account_bank, bank_code = _c.bank_code, beneficiary_email = _c.beneficiary_email, beneficiary_address = _c.beneficiary_address, beneficiary_last_name = _c.beneficiary_last_name, beneficiary_first_name = _c.beneficiary_first_name, purpose_comentary = _c.purpose_comentary, purpose = _c.purpose, country = _c.country, currency = _c.currency, order = _c.order, amount = _c.amount, wallet = _c.wallet, transactions_type = _c.transactions_type, city = _c.city, phone = _c.phone;
-                return "account_bank" + account_bank + "account_type_bank" + account_type_bank + "amount" + amount + "bank_code" + bank_code + "beneficiary_address" + beneficiary_address + "beneficiary_document_number" + beneficiary_document_number + "beneficiary_document_type" + beneficiary_document_type + "beneficiary_email" + beneficiary_email + "beneficiary_first_name" + beneficiary_first_name + "beneficiary_last_name" + beneficiary_last_name + (city ? "city" + city : '') + "country" + country + "currency" + currency + "order" + order + (phone ? "phone" + phone : '') + "purpose" + purpose + "purpose_comentary" + purpose_comentary + "transactions_type" + transactions_type + "url_notify" + url_notify + "wallet" + wallet;
-            }
-            case endpoints_1.default.CREATE_SEND: {
-                var _d = hash, currency = _d.currency, amount = _d.amount, order = _d.order, wallet = _d.wallet, wallet_recipient = _d.wallet_recipient, transactions_type = _d.transactions_type;
-                return "amount" + amount + "currency" + currency + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet + "wallet_recipient" + wallet_recipient;
-            }
-            case endpoints_1.default.CREATE_VITA_SEND: {
-                var _e = hash, currency = _e.currency, amount = _e.amount, order = _e.order, wallet = _e.wallet, email = _e.email, transactions_type = _e.transactions_type;
-                return "amount" + amount + "currency" + currency + "email" + email + "order" + order + "transactions_type" + transactions_type + "wallet" + wallet;
-            }
-            default: {
-                return '';
-            }
+    Configuration.prepareResult = function (hash) {
+        if (hash === void 0) { hash = {}; }
+        if (Object.keys(hash).length > 0) {
+            return Object
+                .keys(hash)
+                .sort()
+                .filter(function (key) { return (hash[key]); })
+                .reduce(function (previousResult, key) {
+                return "" + previousResult + key + hash[key];
+            });
         }
+        return '';
     };
-    Configuration.prepareHeaders = function (hash, type) {
+    Configuration.prepareHeaders = function (hash) {
         var _a = Configuration.instance.credentials, X_Login = _a.X_Login, X_Trans_Key = _a.X_Trans_Key, secret = _a.secret;
         var X_Date = new Date().toISOString();
-        var result = Configuration.prepareResult(hash, type);
+        var result = Configuration.prepareResult(hash);
         var hmac = crypto_1.createHmac('sha256', secret);
         hmac.setEncoding('hex');
         hmac.write("" + X_Login + X_Date + result);

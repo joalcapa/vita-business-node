@@ -67,7 +67,7 @@ var apiCall = function (preConfig) { return __awaiter(void 0, void 0, void 0, fu
                         }];
                 }
                 result = null;
-                config = __assign(__assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint, resource, params)), config_1.default.prepareHeaders(data, endpoint)), { isSuccessful: true });
+                config = __assign(__assign(__assign(__assign({}, preConfig), config_1.default.getUri(endpoint, resource, params)), config_1.default.prepareHeaders(data)), { isSuccessful: true });
                 _e.label = 1;
             case 1:
                 _e.trys.push([1, 3, , 4]);
