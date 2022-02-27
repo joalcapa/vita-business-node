@@ -183,7 +183,7 @@ class Configuration {
                 .sort()
                 .filter((key) => (hash[key]))
                 .reduce((previousResult, key) =>
-                    `${previousResult}${key}${hash[key]}`
+                    `${previousResult}${key}${hash[key]}`, ''
                 );
         }
 
