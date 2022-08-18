@@ -145,7 +145,7 @@ var Configuration = /** @class */ (function () {
                 .filter(function (key) { return (hash[key]); })
                 .reduce(function (previousResult, key) {
                 return "" + previousResult + key + hash[key];
-            }, "");
+            }, '');
         }
         return '';
     };

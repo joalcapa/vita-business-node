@@ -57,7 +57,7 @@ var model_1 = __importDefault(require("../../wallets/model"));
 var providers_1 = require("../../../providers");
 var Transaction = /** @class */ (function (_super) {
     __extends(Transaction, _super);
-    function Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email) {
+    function Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, included) {
         if (id === void 0) { id = null; }
         if (status === void 0) { status = ''; }
         if (order === void 0) { order = ''; }
@@ -71,6 +71,7 @@ var Transaction = /** @class */ (function (_super) {
         if (recipient_wallet === void 0) { recipient_wallet = null; }
         if (sender_wallet === void 0) { sender_wallet = null; }
         if (recipient_email === void 0) { recipient_email = ''; }
+        if (included === void 0) { included = null; }
         var _this = _super.call(this) || this;
         _this.status = '';
         _this.order = '';
@@ -84,6 +85,7 @@ var Transaction = /** @class */ (function (_super) {
         _this.recipient_wallet = null;
         _this.sender_wallet = null;
         _this.recipient_email = '';
+        _this.included = null;
         _this.id = id;
         _this.status = status;
         _this.order = order;
@@ -97,6 +99,7 @@ var Transaction = /** @class */ (function (_super) {
         _this.recipient_wallet = recipient_wallet;
         _this.sender_wallet = sender_wallet;
         _this.recipient_email = recipient_email;
+        _this.included = included;
         return _this;
     }
     Transaction.prototype.createWallet = function (wallet) {
@@ -111,20 +114,20 @@ var Transaction = /** @class */ (function (_super) {
         var _this = this;
         if (filters === void 0) { filters = {}; }
         return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response, _a, _b, id, _c, status_1, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, transactions;
+            var response, _a, _b, id, _c, status_1, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, _d, included, transactions;
             var _this = this;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            return __generator(this, function (_e) {
+                switch (_e.label) {
                     case 0:
                         if (!this.id) return [3 /*break*/, 2];
                         return [4 /*yield*/, providers_1.transactionsProvider.getTransaction(this.id)];
                     case 1:
-                        _a = _d.sent();
+                        _a = _e.sent();
                         return [3 /*break*/, 4];
                     case 2: return [4 /*yield*/, providers_1.transactionsProvider.getTransactions(filters)];
                     case 3:
-                        _a = _d.sent();
-                        _d.label = 4;
+                        _a = _e.sent();
+                        _e.label = 4;
                     case 4:
                         response = _a;
                         if (response.error) {
@@ -133,7 +136,7 @@ var Transaction = /** @class */ (function (_super) {
                         else {
                             if (this.id) {
                                 // eslint-disable-next-line no-unused-expressions
-                                _b = response.transaction, id = _b.id, _c = _b.attributes, status_1 = _c.status, order = _c.order, currency = _c.currency, category = _c.category, amount = _c.amount, total = _c.total, fee_value = _c.fee_value, total_fee = _c.total_fee, created_at = _c.created_at, recipient_wallet = _c.recipient_wallet, sender_wallet = _c.sender_wallet, recipient_email = _c.recipient_email;
+                                _b = response.transaction, id = _b.id, _c = _b.attributes, status_1 = _c.status, order = _c.order, currency = _c.currency, category = _c.category, amount = _c.amount, total = _c.total, fee_value = _c.fee_value, total_fee = _c.total_fee, created_at = _c.created_at, recipient_wallet = _c.recipient_wallet, sender_wallet = _c.sender_wallet, recipient_email = _c.recipient_email, _d = _c.included, included = _d === void 0 ? null : _d;
                                 this.id = id;
                                 this.status = status_1;
                                 this.order = order;
@@ -147,12 +150,13 @@ var Transaction = /** @class */ (function (_super) {
                                 this.recipient_wallet = this.createWallet(recipient_wallet);
                                 this.sender_wallet = this.createWallet(sender_wallet);
                                 this.recipient_email = recipient_email;
+                                this.included = included;
                                 resolve(this);
                             }
                             else {
                                 transactions = response.transactions.map(function (transaction) {
-                                    var id = transaction.id, _a = transaction.attributes, status = _a.status, order = _a.order, currency = _a.currency, category = _a.category, amount = _a.amount, total = _a.total, fee_value = _a.fee_value, total_fee = _a.total_fee, created_at = _a.created_at, recipient_wallet = _a.recipient_wallet, sender_wallet = _a.sender_wallet, recipient_email = _a.recipient_email;
-                                    return new Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, _this.createWallet(recipient_wallet), _this.createWallet(sender_wallet), recipient_email);
+                                    var id = transaction.id, _a = transaction.attributes, status = _a.status, order = _a.order, currency = _a.currency, category = _a.category, amount = _a.amount, total = _a.total, fee_value = _a.fee_value, total_fee = _a.total_fee, created_at = _a.created_at, recipient_wallet = _a.recipient_wallet, sender_wallet = _a.sender_wallet, recipient_email = _a.recipient_email, _b = _a.included, included = _b === void 0 ? null : _b;
+                                    return new Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, _this.createWallet(recipient_wallet), _this.createWallet(sender_wallet), recipient_email, included);
                                 });
                                 resolve({
                                     data: transactions,

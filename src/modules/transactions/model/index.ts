@@ -15,6 +15,7 @@ class Transaction extends Base {
     private recipient_wallet: any = null;
     private sender_wallet: any = null;
     private recipient_email: string = '';
+    private included: any = null;
 
     public constructor(
         id: any = null,
@@ -30,6 +31,7 @@ class Transaction extends Base {
         recipient_wallet: any = null,
         sender_wallet: any = null,
         recipient_email: string = '',
+        included: any = null
     ) {
         super();
 
@@ -46,6 +48,7 @@ class Transaction extends Base {
         this.recipient_wallet = recipient_wallet;
         this.sender_wallet = sender_wallet;
         this.recipient_email = recipient_email;
+        this.included = included;
     }
 
     private createWallet(wallet: any = null) {
@@ -81,6 +84,7 @@ class Transaction extends Base {
                                 recipient_wallet,
                                 sender_wallet,
                                 recipient_email,
+                                included = null,
                             },
                         },
                     } = response;
@@ -98,6 +102,7 @@ class Transaction extends Base {
                     this.recipient_wallet = this.createWallet(recipient_wallet);
                     this.sender_wallet = this.createWallet(sender_wallet);
                     this.recipient_email = recipient_email;
+                    this.included = included;
 
                     resolve(this);
                 } else {
@@ -117,6 +122,7 @@ class Transaction extends Base {
                                 recipient_wallet,
                                 sender_wallet,
                                 recipient_email,
+                                included = null,
                             },
                         } = transaction;
 
@@ -134,6 +140,7 @@ class Transaction extends Base {
                             this.createWallet(recipient_wallet),
                             this.createWallet(sender_wallet),
                             recipient_email,
+                            included
                         );
                     });
 
