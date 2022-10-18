@@ -1,6 +1,6 @@
 {
   "name": "vita-business-node",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "SDK Vita Business",
   "main": "src/index.js",
   "scripts": {
