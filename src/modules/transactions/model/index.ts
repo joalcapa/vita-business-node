@@ -16,6 +16,8 @@ class Transaction extends Base {
     private sender_wallet: any = null;
     private recipient_email: string = '';
     private included: any = null;
+    private vita_transaction_id: string = '';
+    private tracking_url: string = '';
 
     public constructor(
         id: any = null,
@@ -31,7 +33,9 @@ class Transaction extends Base {
         recipient_wallet: any = null,
         sender_wallet: any = null,
         recipient_email: string = '',
-        included: any = null
+        included: any = null,
+        vita_transaction_id: string = '',
+        tracking_url: string = ''
     ) {
         super();
 
@@ -49,6 +53,8 @@ class Transaction extends Base {
         this.sender_wallet = sender_wallet;
         this.recipient_email = recipient_email;
         this.included = included;
+        this.vita_transaction_id = vita_transaction_id;
+        this.tracking_url = tracking_url;
     }
 
     private createWallet(wallet: any = null) {
@@ -85,6 +91,8 @@ class Transaction extends Base {
                                 sender_wallet,
                                 recipient_email,
                                 included = null,
+                                vita_transaction_id = '',
+                                tracking_url = '',
                             },
                         },
                     } = response;
@@ -103,6 +111,8 @@ class Transaction extends Base {
                     this.sender_wallet = this.createWallet(sender_wallet);
                     this.recipient_email = recipient_email;
                     this.included = included;
+                    this.vita_transaction_id = vita_transaction_id;
+                    this.tracking_url = tracking_url;
 
                     resolve(this);
                 } else {
@@ -123,6 +133,8 @@ class Transaction extends Base {
                                 sender_wallet,
                                 recipient_email,
                                 included = null,
+                                vita_transaction_id = '',
+                                tracking_url = '',
                             },
                         } = transaction;
 
@@ -140,7 +152,9 @@ class Transaction extends Base {
                             this.createWallet(recipient_wallet),
                             this.createWallet(sender_wallet),
                             recipient_email,
-                            included
+                            included,
+                            vita_transaction_id,
+                            tracking_url
                         );
                     });
 
