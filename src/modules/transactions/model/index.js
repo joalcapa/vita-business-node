@@ -57,7 +57,7 @@ var model_1 = __importDefault(require("../../wallets/model"));
 var providers_1 = require("../../../providers");
 var Transaction = /** @class */ (function (_super) {
     __extends(Transaction, _super);
-    function Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, included) {
+    function Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, included, vita_transaction_id, tracking_url) {
         if (id === void 0) { id = null; }
         if (status === void 0) { status = ''; }
         if (order === void 0) { order = ''; }
@@ -72,6 +72,8 @@ var Transaction = /** @class */ (function (_super) {
         if (sender_wallet === void 0) { sender_wallet = null; }
         if (recipient_email === void 0) { recipient_email = ''; }
         if (included === void 0) { included = null; }
+        if (vita_transaction_id === void 0) { vita_transaction_id = ''; }
+        if (tracking_url === void 0) { tracking_url = ''; }
         var _this = _super.call(this) || this;
         _this.status = '';
         _this.order = '';
@@ -86,6 +88,8 @@ var Transaction = /** @class */ (function (_super) {
         _this.sender_wallet = null;
         _this.recipient_email = '';
         _this.included = null;
+        _this.vita_transaction_id = '';
+        _this.tracking_url = '';
         _this.id = id;
         _this.status = status;
         _this.order = order;
@@ -100,6 +104,8 @@ var Transaction = /** @class */ (function (_super) {
         _this.sender_wallet = sender_wallet;
         _this.recipient_email = recipient_email;
         _this.included = included;
+        _this.vita_transaction_id = vita_transaction_id;
+        _this.tracking_url = tracking_url;
         return _this;
     }
     Transaction.prototype.createWallet = function (wallet) {
@@ -114,20 +120,20 @@ var Transaction = /** @class */ (function (_super) {
         var _this = this;
         if (filters === void 0) { filters = {}; }
         return this.promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response, _a, _b, id, _c, status_1, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, _d, included, transactions;
+            var response, _a, _b, id, _c, status_1, order, currency, category, amount, total, fee_value, total_fee, created_at, recipient_wallet, sender_wallet, recipient_email, _d, included, _e, vita_transaction_id, _f, tracking_url, transactions;
             var _this = this;
-            return __generator(this, function (_e) {
-                switch (_e.label) {
+            return __generator(this, function (_g) {
+                switch (_g.label) {
                     case 0:
                         if (!this.id) return [3 /*break*/, 2];
                         return [4 /*yield*/, providers_1.transactionsProvider.getTransaction(this.id)];
                     case 1:
-                        _a = _e.sent();
+                        _a = _g.sent();
                         return [3 /*break*/, 4];
                     case 2: return [4 /*yield*/, providers_1.transactionsProvider.getTransactions(filters)];
                     case 3:
-                        _a = _e.sent();
-                        _e.label = 4;
+                        _a = _g.sent();
+                        _g.label = 4;
                     case 4:
                         response = _a;
                         if (response.error) {
@@ -136,7 +142,7 @@ var Transaction = /** @class */ (function (_super) {
                         else {
                             if (this.id) {
                                 // eslint-disable-next-line no-unused-expressions
-                                _b = response.transaction, id = _b.id, _c = _b.attributes, status_1 = _c.status, order = _c.order, currency = _c.currency, category = _c.category, amount = _c.amount, total = _c.total, fee_value = _c.fee_value, total_fee = _c.total_fee, created_at = _c.created_at, recipient_wallet = _c.recipient_wallet, sender_wallet = _c.sender_wallet, recipient_email = _c.recipient_email, _d = _c.included, included = _d === void 0 ? null : _d;
+                                _b = response.transaction, id = _b.id, _c = _b.attributes, status_1 = _c.status, order = _c.order, currency = _c.currency, category = _c.category, amount = _c.amount, total = _c.total, fee_value = _c.fee_value, total_fee = _c.total_fee, created_at = _c.created_at, recipient_wallet = _c.recipient_wallet, sender_wallet = _c.sender_wallet, recipient_email = _c.recipient_email, _d = _c.included, included = _d === void 0 ? null : _d, _e = _c.vita_transaction_id, vita_transaction_id = _e === void 0 ? '' : _e, _f = _c.tracking_url, tracking_url = _f === void 0 ? '' : _f;
                                 this.id = id;
                                 this.status = status_1;
                                 this.order = order;
@@ -151,12 +157,14 @@ var Transaction = /** @class */ (function (_super) {
                                 this.sender_wallet = this.createWallet(sender_wallet);
                                 this.recipient_email = recipient_email;
                                 this.included = included;
+                                this.vita_transaction_id = vita_transaction_id;
+                                this.tracking_url = tracking_url;
                                 resolve(this);
                             }
                             else {
                                 transactions = response.transactions.map(function (transaction) {
-                                    var id = transaction.id, _a = transaction.attributes, status = _a.status, order = _a.order, currency = _a.currency, category = _a.category, amount = _a.amount, total = _a.total, fee_value = _a.fee_value, total_fee = _a.total_fee, created_at = _a.created_at, recipient_wallet = _a.recipient_wallet, sender_wallet = _a.sender_wallet, recipient_email = _a.recipient_email, _b = _a.included, included = _b === void 0 ? null : _b;
-                                    return new Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, _this.createWallet(recipient_wallet), _this.createWallet(sender_wallet), recipient_email, included);
+                                    var id = transaction.id, _a = transaction.attributes, status = _a.status, order = _a.order, currency = _a.currency, category = _a.category, amount = _a.amount, total = _a.total, fee_value = _a.fee_value, total_fee = _a.total_fee, created_at = _a.created_at, recipient_wallet = _a.recipient_wallet, sender_wallet = _a.sender_wallet, recipient_email = _a.recipient_email, _b = _a.included, included = _b === void 0 ? null : _b, _c = _a.vita_transaction_id, vita_transaction_id = _c === void 0 ? '' : _c, _d = _a.tracking_url, tracking_url = _d === void 0 ? '' : _d;
+                                    return new Transaction(id, status, order, currency, category, amount, total, fee_value, total_fee, created_at, _this.createWallet(recipient_wallet), _this.createWallet(sender_wallet), recipient_email, included, vita_transaction_id, tracking_url);
                                 });
                                 resolve({
                                     data: transactions,
