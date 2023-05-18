@@ -47,9 +47,18 @@ var Configuration = /** @class */ (function () {
                 method: 'post',
             };
         }
-        if (endpoint === endpoints_1.default.GET_TRANSACTIONS || endpoint === endpoints_1.default.GET_TRANSACTION) {
+        if (endpoint === endpoints_1.default.GET_TRANSACTION) {
             return {
                 url: Configuration.getTransactionsUrl(resource),
+                method: 'get',
+            };
+        }
+        if (endpoint === endpoints_1.default.GET_TRANSACTIONS) {
+            return {
+                url: Configuration.getTransactionsUrl(resource) + "?" + Object.entries(params).map(function (_a) {
+                    var key = _a[0], value = _a[1];
+                    return key + "=" + value;
+                }).join("&"),
                 method: 'get',
             };
         }
