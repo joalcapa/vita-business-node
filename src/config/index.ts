@@ -73,9 +73,16 @@ class Configuration {
             }
         }
 
-        if (endpoint === endpoints.GET_TRANSACTIONS || endpoint === endpoints.GET_TRANSACTION) {
+        if (endpoint === endpoints.GET_TRANSACTION) {
             return {
                 url: Configuration.getTransactionsUrl(resource),
+                method: 'get',
+            }
+        }
+
+        if (endpoint === endpoints.GET_TRANSACTIONS) {
+            return {
+                url: `${Configuration.getTransactionsUrl(resource)}?${Object.entries(params).map(([key, value]) => `${key}=${value}`).join("&")}`,
                 method: 'get',
             }
         }
