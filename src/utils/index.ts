@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import Configuration from '../config';
 import {REQUESTS_KEY_STORAGE} from '../config/constants';
 
-export const writeRequestsInStorage = (request: any) => {
+export const writeRequestsInStorage = (request: unknown) => {
     if (global.localStorage && Configuration.isDevelopment()) {
         let fromStorage = null;
         let requests = {req: []};
