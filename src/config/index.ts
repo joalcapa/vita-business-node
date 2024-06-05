@@ -129,6 +129,13 @@ class Configuration {
             }
         }
 
+        if (endpoint === endpoints.GET_BENEFICIARY) {
+            return {
+                url: Configuration.getBeneficiaryUrl(),
+                method: 'post',
+            }
+        }
+
         if (endpoint === endpoints.GET_WITHDRAWAL_RULES) {
             return {
                 url: Configuration.getWithdrawalRulesUrl(),
@@ -177,6 +184,10 @@ class Configuration {
 
     public static getVitaUsersUrl() {
         return `${Configuration.getUrl()}/vita_users`;
+    }
+
+    public static getBeneficiaryUrl() {
+        return `${Configuration.getUrl()}/beneficiaries/get_beneficiary`;
     }
 
     public static getWithdrawalRulesUrl() {

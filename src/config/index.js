@@ -55,17 +55,17 @@ var Configuration = /** @class */ (function () {
         }
         if (endpoint === endpoints_1.default.GET_TRANSACTIONS) {
             return {
-                url: Configuration.getTransactionsUrl(resource) + "?" + Object.entries(params).map(function (_a) {
+                url: "".concat(Configuration.getTransactionsUrl(resource), "?").concat(Object.entries(params).map(function (_a) {
                     var key = _a[0], value = _a[1];
-                    return key + "=" + value;
-                }).join("&"),
+                    return "".concat(key, "=").concat(value);
+                }).join("&")),
                 method: 'get',
             };
         }
         if (endpoint === endpoints_1.default.GET_WALLETS || endpoint === endpoints_1.default.GET_WALLET) {
             var url = Configuration.getWalletsUrl(resource);
             var request = params;
-            url = url + "?" + (params.hasOwnProperty('page') ? "page=" + request.page + "&" : '') + (params.hasOwnProperty('count') ? "count=" + request.count + "&" : '') + (params.hasOwnProperty('is_master') ? "is_master=" + request.is_master : '');
+            url = "".concat(url, "?").concat(params.hasOwnProperty('page') ? "page=".concat(request.page, "&") : '').concat(params.hasOwnProperty('count') ? "count=".concat(request.count, "&") : '').concat(params.hasOwnProperty('is_master') ? "is_master=".concat(request.is_master) : '');
             return {
                 url: url,
                 method: 'get',
@@ -80,22 +80,28 @@ var Configuration = /** @class */ (function () {
         if (endpoint === endpoints_1.default.GET_BANKS) {
             var iso_code = params.iso_code;
             return {
-                url: Configuration.getBanksUrl() + "?country=" + iso_code,
+                url: "".concat(Configuration.getBanksUrl(), "?country=").concat(iso_code),
                 method: 'get',
             };
         }
         if (endpoint === endpoints_1.default.GET_PRICES) {
             var request = params;
             return {
-                url: "" + Configuration.getPricesUrl() + (request.uuid ? "?wallet_uuid=" + request.uuid : ''),
+                url: "".concat(Configuration.getPricesUrl()).concat(request.uuid ? "?wallet_uuid=".concat(request.uuid) : ''),
                 method: 'get',
             };
         }
         if (endpoint === endpoints_1.default.GET_VITA_EMAIL) {
             var request = params;
             return {
-                url: Configuration.getVitaUsersUrl() + "?email=" + request.email,
+                url: "".concat(Configuration.getVitaUsersUrl(), "?email=").concat(request.email),
                 method: 'get',
+            };
+        }
+        if (endpoint === endpoints_1.default.GET_BENEFICIARY) {
+            return {
+                url: Configuration.getBeneficiaryUrl(),
+                method: 'post',
             };
         }
         if (endpoint === endpoints_1.default.GET_WITHDRAWAL_RULES) {
@@ -127,23 +133,26 @@ var Configuration = /** @class */ (function () {
     };
     Configuration.getWalletsUrl = function (resource) {
         if (resource === void 0) { resource = ''; }
-        return Configuration.getUrl() + "/wallets/" + resource;
+        return "".concat(Configuration.getUrl(), "/wallets/").concat(resource);
     };
     Configuration.getTransactionsUrl = function (resource) {
         if (resource === void 0) { resource = ''; }
-        return Configuration.getUrl() + "/transactions/" + resource;
+        return "".concat(Configuration.getUrl(), "/transactions/").concat(resource);
     };
     Configuration.getPricesUrl = function () {
-        return Configuration.getUrl() + "/prices";
+        return "".concat(Configuration.getUrl(), "/prices");
     };
     Configuration.getBanksUrl = function () {
-        return Configuration.getUrl() + "/banks";
+        return "".concat(Configuration.getUrl(), "/banks");
     };
     Configuration.getVitaUsersUrl = function () {
-        return Configuration.getUrl() + "/vita_users";
+        return "".concat(Configuration.getUrl(), "/vita_users");
+    };
+    Configuration.getBeneficiaryUrl = function () {
+        return "".concat(Configuration.getUrl(), "/beneficiaries/get_beneficiary");
     };
     Configuration.getWithdrawalRulesUrl = function () {
-        return Configuration.getUrl() + "/withdrawal_rules";
+        return "".concat(Configuration.getUrl(), "/withdrawal_rules");
     };
     Configuration.prepareResult = function (hash) {
         if (hash === void 0) { hash = {}; }
@@ -153,7 +162,7 @@ var Configuration = /** @class */ (function () {
                 .sort()
                 .filter(function (key) { return (hash[key]); })
                 .reduce(function (previousResult, key) {
-                return "" + previousResult + key + hash[key];
+                return "".concat(previousResult).concat(key).concat(hash[key]);
             }, '');
         }
         return '';
@@ -162,9 +171,9 @@ var Configuration = /** @class */ (function () {
         var _a = Configuration.instance.credentials, X_Login = _a.X_Login, X_Trans_Key = _a.X_Trans_Key, secret = _a.secret;
         var X_Date = new Date().toISOString();
         var result = Configuration.prepareResult(hash);
-        var hmac = crypto_1.createHmac('sha256', secret);
+        var hmac = (0, crypto_1.createHmac)('sha256', secret);
         hmac.setEncoding('hex');
-        hmac.write("" + X_Login + X_Date + result);
+        hmac.write("".concat(X_Login).concat(X_Date).concat(result));
         hmac.end();
         var signature = hmac.read();
         return {
@@ -173,7 +182,7 @@ var Configuration = /** @class */ (function () {
                 "X-Login": X_Login,
                 "X-Trans-Key": X_Trans_Key,
                 "Content-Type": "application/json",
-                "Authorization": "V2-HMAC-SHA256, Signature: " + signature,
+                "Authorization": "V2-HMAC-SHA256, Signature: ".concat(signature),
             },
         };
     };

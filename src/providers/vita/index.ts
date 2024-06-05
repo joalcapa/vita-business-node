@@ -10,6 +10,15 @@ const getVitaEmail = (email: string) => {
     });
 };
 
+const getBeneficiary = (data = {}) => {
+    console.log("data: ", data)
+    return apiCall({
+        endpoint: endpoints.GET_BENEFICIARY,
+        data,
+    });
+};
+
 export default {
     getVitaEmail,
+    getBeneficiary,
 };

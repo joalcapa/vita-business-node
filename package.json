@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "tsc": "tsc",
-    "recarga": "npm run tsc && node proccess_task.js"
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -23,14 +22,14 @@
   },
   "homepage": "https://github.com/joalcapa/vita-business-node#readme",
   "dependencies": {
-    "axios": "^1.6.5",
+    "axios": "^1.7.2",
     "crypto": "^1.0.1",
-    "typescript": "^3.9.10"
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
-    "@types/node": "^14.17.20",
+    "@types/node": "^14.18.63",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3"
   }

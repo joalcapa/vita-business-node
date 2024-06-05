@@ -5,6 +5,7 @@ import Configuration from '../../config';
 import {writeRequestsInStorage} from "../../utils";
 
 const apiCall = async (preConfig: any) => {
+    console.log(preConfig)
     const {data = {}, resource = '', endpoint = '', params = {}} = preConfig;
 
     if (!Configuration.isCredentials()) {
@@ -23,6 +24,7 @@ const apiCall = async (preConfig: any) => {
     };
 
     try {
+        console.log("condig: ", config)
         const response = await axios(config);
         result = response.data;
     } catch (e) {

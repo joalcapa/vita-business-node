@@ -3,20 +3,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isDevelopment = exports.isCredentials = exports.config = void 0;
+exports.isDevelopment = exports.isCredentials = exports.config = exports.Transaction = exports.Price = exports.Bank = exports.Wallet = void 0;
 var config_1 = __importDefault(require("./config"));
 var modules_1 = require("./modules");
 var vita_1 = __importDefault(require("./providers/vita"));
 var transactions_1 = require("./providers/transactions");
 var model_1 = require("./modules/wallets/model");
-Object.defineProperty(exports, "Wallet", { enumerable: true, get: function () { return model_1.default; } });
+Object.defineProperty(exports, "Wallet", { enumerable: true, get: function () { return __importDefault(model_1).default; } });
 var model_2 = require("./modules/banks/model");
-Object.defineProperty(exports, "Bank", { enumerable: true, get: function () { return model_2.default; } });
+Object.defineProperty(exports, "Bank", { enumerable: true, get: function () { return __importDefault(model_2).default; } });
 var model_3 = require("./modules/prices/model");
-Object.defineProperty(exports, "Price", { enumerable: true, get: function () { return model_3.default; } });
+Object.defineProperty(exports, "Price", { enumerable: true, get: function () { return __importDefault(model_3).default; } });
 var model_4 = require("./modules/transactions/model");
-Object.defineProperty(exports, "Transaction", { enumerable: true, get: function () { return model_4.default; } });
-exports.config = function (credentials) {
+Object.defineProperty(exports, "Transaction", { enumerable: true, get: function () { return __importDefault(model_4).default; } });
+var config = function (credentials) {
     var _a = credentials.X_Login, X_Login = _a === void 0 ? null : _a, _b = credentials.X_Trans_Key, X_Trans_Key = _b === void 0 ? null : _b, _c = credentials.secret, secret = _c === void 0 ? null : _c, _d = credentials.env, env = _d === void 0 ? null : _d;
     if (X_Login && X_Trans_Key && secret && env && (env === config_1.default.LOCAL ||
         env === config_1.default.QA ||
@@ -24,12 +24,15 @@ exports.config = function (credentials) {
         env === config_1.default.PROD))
         config_1.default.getInstance().setCredentials(credentials);
 };
-exports.isCredentials = function () {
+exports.config = config;
+var isCredentials = function () {
     return config_1.default.isCredentials();
 };
-exports.isDevelopment = function () {
+exports.isCredentials = isCredentials;
+var isDevelopment = function () {
     return config_1.default.isDevelopment();
 };
+exports.isDevelopment = isDevelopment;
 exports.default = {
     vitaProvider: vita_1.default,
     rulesProvider: {
